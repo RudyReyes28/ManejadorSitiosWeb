@@ -15,46 +15,31 @@ import java.util.logging.Logger;
 public class ManejadorWeb {
 
     public static void main(String[] args) {
-        String prueba = "<accion nombre=\"NUEVA_PAGINA\">\n" +
+        String prueba = "<accion nombre=\"MODIFICAR_COMPONENTE\">\n" +
 "	<parametros>\n" +
+"	\n" +
 "		<parametro nombre=\"ID\">\n" +
+"			[_componente-1]\n" +
+"		</parametro>\n" +
+"		\n" +
+"		<parametro nombre=\"PAGINA\">\n" +
 "			[_MIPagina]\n" +
 "		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"TITULO\">\n" +
-"			[Mi titulo]\n" +
-"		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"SITIO\">\n" +
-"			[_sitioWebMercado]\n" +
-"		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"PADRE\">\n" +
-"			[_MIPaginaPadre]\n" +
-"		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"USUARIO_CREACION\">\n" +
-"			[_Juan]\n" +
-"		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"FECHA_CREACION\"> \n" +
-"			[2024-04-11]\n" +
-"		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"FECHA_MODIFICACION\">\n" +
-"			[2024-04-11]\n" +
-"		</parametro>\n" +
-"		\n" +
-"		<parametro nombre=\"USUARIO_MODIFICACION\"> \n" +
-"			[$juan]\n" +
+"\n" +
+"		<parametro nombre=\"CLASE\">\n" +
+"			[TITULO]\n" +
 "		</parametro>\n" +
 "	</parametros>\n" +
-"	\n" +
-"	<etiquetas>  \n" +
-"		<etiqueta valor=\"etiqueta1\"/>\n" +
-"		<etiqueta valor=\"etiqueta2\"/>\n" +
-"	</etiquetas>\n" +
 "\n" +
+"	<atributos>\n" +
+"		<atributo nombre=\"TEXTO\">\n" +
+"			[Este es el texto que aparece en el titulo :) ]\n" +
+"		</atributo>\n" +
+"		\n" +
+"		<atributo nombre=\"COLOR\">\n" +
+"			[#5A5A5A]\n" +
+"		</atributo>\n" +
+"	</atributos>\n" +
 "</accion>";
         LexerXML lexer = new LexerXML(new StringReader(prueba));
         ParserXML parser = new ParserXML(lexer);

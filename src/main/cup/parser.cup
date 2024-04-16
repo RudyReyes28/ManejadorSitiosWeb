@@ -5,13 +5,22 @@ class ParserXML;
 
 /*DEFINIENDO TERMINALES*/
 terminal MENOR, MAYOR, DIAGONAL, ACCION, NOMBRE, IGUAL, COMILLA, CREARSITIO, BORRARSITIO,NUEVAPAGINA, PARAMETROS, PARAMETRO;
-terminal IDPARAM, USUARIOCREACION, FECHAMODIFICACION, USUARIOMODIFICACION, FECHACREACION, PARAMETROSCIERRE;
-terminal TITULO, SITIO, PADRE, ETIQUETA, CONTENIDOETIQUETA, VALORETIQUETA, ETIQUETASCIERRE;
+terminal BORRARPAGINA, IDPARAM, USUARIOCREACION, FECHAMODIFICACION, USUARIOMODIFICACION, FECHACREACION, PARAMETROSCIERRE;
+terminal MODIFICARPAGINA, PAGINA, CLASE, ATRIBUTOS, ATRIBUTO,ATRIBUTOSCIERRE, TEXTO, COLOR,ORIGEN,  ALTURA, ANCHO, PADRE;
+terminal ETIQUETAS, TITULO, SITIO, ETIQUETA, CONTENIDOETIQUETA, VALORETIQUETA, ETIQUETASCIERRE, TITULOC;
+terminal PARRAFO, IMAGEN, VIDEO, MENU, AGREGARCOMPONENTE, ALINEACION, ELIMINARCOMPONENTE, MODIFICARCOMPONENTE;
 terminal String LITERAL, VALORID, VALORFECHA, DATOETIQUETA;
 
+
 /*NO TERMINALES*/
-non terminal accion, tipo_accion, parametros_crear_sitio, parametros_borrar_sitio;
+non terminal accion, tipo_accion, parametros_crear_sitio, parametros_borrar_sitio, parametros_borrar_pagina;
 non terminal  parametro_lista_crear_sitio, parametro_borrar_sitio, parametros_nueva_pagina;
+non terminal parametro_borrar_pagina, parametros_modificar_pagina, parametro_modificar_pagina;
+non terminal parametro_lista_modificar_pagina, tipo_param_modificar_pagina, parametros_agregar_componente ;
+non terminal parametro_lista_agregar_co, parametro_agregar_co, tipo_clase, atributos, atributo_lista;
+non terminal atributo, valor_atributo, tipo_param_agregar_co, parametros_eliminar_componente;
+non terminal parametro_lista_eliminar_co, parametro_eliminar_co, tipo_param_eliminar_co;
+non terminal parametros_modificar_componente;
 non terminal parametro_lista_nueva_pagina, parametro_nueva_pagina, tipo_param_nueva_pagina, etiquetas, etiqueta;
 non terminal parametro_crear_sitio, tipo_param_crear_sitio, parametro_tipo_id, parametro_tipo_usuario_creacion;
 non terminal parametro_tipo_fecha_creacion, parametro_tipo_fecha_mod, parametro_tipo_usuario_mod, empty;
@@ -25,7 +34,12 @@ accion ::= MENOR ACCION NOMBRE IGUAL  COMILLA tipo_accion
 tipo_accion ::= CREARSITIO COMILLA MAYOR parametros_crear_sitio MENOR DIAGONAL ACCION MAYOR
             | BORRARSITIO COMILLA MAYOR parametros_borrar_sitio MENOR DIAGONAL ACCION MAYOR
             | NUEVAPAGINA COMILLA MAYOR parametros_nueva_pagina etiquetas MENOR DIAGONAL ACCION MAYOR
-		;
+            | BORRARPAGINA COMILLA MAYOR parametros_borrar_pagina MENOR DIAGONAL ACCION MAYOR
+            | MODIFICARPAGINA COMILLA MAYOR parametros_modificar_pagina etiquetas MENOR DIAGONAL ACCION MAYOR
+            | AGREGARCOMPONENTE COMILLA MAYOR parametros_agregar_componente atributos MENOR DIAGONAL ACCION MAYOR
+            | ELIMINARCOMPONENTE COMILLA MAYOR parametros_eliminar_componente MENOR DIAGONAL ACCION MAYOR
+            | MODIFICARCOMPONENTE COMILLA MAYOR parametros_modificar_componente atributos MENOR DIAGONAL ACCION MAYOR
+	;
 
 
 /*PARAMETROS PARA CREAR SITIOS WEB*/
@@ -70,7 +84,68 @@ tipo_param_nueva_pagina ::= parametro_tipo_id:pi {:System.out.println("Crear pag
 			| parametro_tipo_usuario_mod:um  {:System.out.println("Crear pag Usuario mod: "+um);:}
 			;
 
+/*PARAMETROS PARA ELIMINAR PAGINA*/
+
+parametros_borrar_pagina ::= MENOR PARAMETROS MAYOR parametro_borrar_pagina PARAMETROSCIERRE;
+
+parametro_borrar_pagina ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA parametro_tipo_id:pi {:System.out.println("Borrar pag: "+pi);:};
 					
+
+/*PARAMETROS MODIFICAR PAGINA*/
+
+parametros_modificar_pagina ::= MENOR PARAMETROS MAYOR parametro_lista_modificar_pagina PARAMETROSCIERRE;
+						
+parametro_lista_modificar_pagina ::= parametro_modificar_pagina parametro_lista_modificar_pagina
+				|  parametro_modificar_pagina 
+				;
+
+parametro_modificar_pagina ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_modificar_pagina ;
+
+tipo_param_modificar_pagina ::= parametro_tipo_id:pi {:System.out.println("Mod pagina id: "+pi);:}
+				| TITULO COMILLA MAYOR  LITERAL:li  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Mod pagina titulo: "+li);:}
+				;					
+					
+/*PARAMETROS PARA AGREGAR COMPONENTES*/
+
+parametros_agregar_componente ::= MENOR PARAMETROS MAYOR parametro_lista_agregar_co PARAMETROSCIERRE ;
+
+
+
+/*PARAMETROS PARA ELIMINAR COMPONENTES*/
+parametros_eliminar_componente ::= MENOR PARAMETROS MAYOR parametro_lista_eliminar_co  PARAMETROSCIERRE;
+
+parametro_lista_eliminar_co ::= parametro_eliminar_co parametro_lista_eliminar_co
+				|  parametro_eliminar_co
+				;
+							
+		
+parametro_eliminar_co ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_eliminar_co;
+
+tipo_param_eliminar_co ::= parametro_tipo_id:ic {:System.out.println("Id elim componente: "+ic);:}
+			| PAGINA COMILLA MAYOR  VALORID:pi  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Id pagina del comp a elim: "+pi);:}
+			;
+
+/*PARAMETROS PARA MODIFICAR COMPONENTES*/
+parametros_modificar_componente ::= MENOR PARAMETROS MAYOR parametro_lista_agregar_co PARAMETROSCIERRE {:System.out.println("Para modificar componentes");:};
+
+/*ESTO SIRVE PARA AGREGAR COMPONENTES Y MODIFICAR*/
+parametro_lista_agregar_co ::= parametro_agregar_co parametro_lista_agregar_co
+				|  parametro_agregar_co 
+				;
+
+parametro_agregar_co ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_agregar_co;
+
+tipo_param_agregar_co ::= parametro_tipo_id:ic {:System.out.println("Id componente: "+ic);:}
+			| PAGINA COMILLA MAYOR  VALORID:pi  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Id pagina: "+pi);:}
+			| CLASE COMILLA MAYOR  tipo_clase:tc  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Clase comp: "+tc);:}
+			;
+tipo_clase ::= TITULOC {:RESULT = "TITULO"; :}
+	| PARRAFO {:RESULT = "PARRAFO"; :}
+	| IMAGEN {:RESULT = "IMAGEN"; :}
+	| VIDEO {:RESULT = "VIDEO"; :}
+	| MENU {:RESULT = "MENU"; :}
+	;
+
 
 /*GENERALIDADES REPETIDAS*/
 parametro_tipo_id ::= IDPARAM COMILLA MAYOR  VALORID:i  MENOR DIAGONAL PARAMETRO MAYOR {:RESULT = i; :};
@@ -89,5 +164,25 @@ etiquetas ::= CONTENIDOETIQUETA etiqueta  ETIQUETASCIERRE
 etiqueta ::= MENOR ETIQUETA VALORETIQUETA IGUAL COMILLA DATOETIQUETA:et1 COMILLA DIAGONAL MAYOR etiqueta {:System.out.println("Etiqueta: "+et1);:}
 	|  MENOR ETIQUETA VALORETIQUETA IGUAL COMILLA DATOETIQUETA:et2 COMILLA DIAGONAL MAYOR {:System.out.println("Etiqueta: "+et2);:}
 	;
+
+		
+atributos ::= MENOR ATRIBUTOS MAYOR atributo_lista  ATRIBUTOSCIERRE
+	;
+			
+atributo_lista ::= atributo atributo_lista
+		|  atributo 
+		;
+atributo ::= MENOR ATRIBUTO NOMBRE IGUAL COMILLA valor_atributo:va COMILLA MAYOR LITERAL:li MENOR DIAGONAL ATRIBUTO MAYOR {:System.out.println("Atributos: "+va+" "+li);:}
+			;
+valor_atributo ::= TEXTO {:RESULT = "TEXTO"; :}
+		| ALINEACION {:RESULT = "ALINEACION"; :}
+		| COLOR {:RESULT = "COLOR"; :}
+		| ORIGEN {:RESULT = "ORIGEN"; :}
+		| ALTURA {:RESULT = "ALTURA"; :}
+		| ANCHO {:RESULT = "ANCHO"; :}
+		| PADRE {:RESULT = "PADRE"; :}
+		| ETIQUETAS {:RESULT = "ETIQUETAS"; :}
+                ;
+			
 			
 empty ::= /* empty */ ;
