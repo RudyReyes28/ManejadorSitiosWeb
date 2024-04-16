@@ -8,62 +8,41 @@ package com.rudyreyes.manejadorweb;
 /** CUP generated interface containing symbol constants. */
 public interface ParserXMLSym {
   /* terminals */
-  public static final int DIAGONAL = 5;
-  public static final int MODIFICARCOMPONENTE = 17;
-  public static final int DATOETIQUETA = 50;
-  public static final int ALINEACION = 41;
-  public static final int NUEVAPAGINA = 12;
-  public static final int PAGINA = 23;
-  public static final int PARAMETROS = 18;
-  public static final int NOMBRE = 7;
-  public static final int ANCHO = 45;
-  public static final int ETIQUETAS = 35;
-  public static final int VIDEO = 29;
-  public static final int VALORFECHA = 49;
-  public static final int MENU = 28;
-  public static final int IGUAL = 8;
-  public static final int MODIFICARPAGINA = 14;
-  public static final int VALORID = 48;
-  public static final int BORRARPAGINA = 13;
-  public static final int TITULO = 20;
-  public static final int PADRE = 22;
-  public static final int USUARIOCREACION = 31;
-  public static final int EOF = 0;
-  public static final int TITULOC = 25;
-  public static final int ELIMINARCOMPONENTE = 16;
-  public static final int CLASE = 24;
-  public static final int error = 1;
-  public static final int COMILLA = 9;
-  public static final int IDPARAM = 30;
+  public static final int FECHACREACION = 18;
+  public static final int USUARIOCREACION = 15;
   public static final int MENOR = 2;
-  public static final int CREARSITIO = 10;
-  public static final int ATRIBUTOS = 37;
-  public static final int ATRIBUTO = 38;
-  public static final int FECHAMODIFICACION = 33;
-  public static final int ACCION = 6;
-  public static final int COLOR = 42;
-  public static final int MAYOR = 4;
-  public static final int CONTENIDOETIQUETA = 46;
-  public static final int LITERAL = 47;
-  public static final int IMAGEN = 27;
-  public static final int ORIGEN = 43;
-  public static final int USUARIOMODIFICACION = 34;
-  public static final int PARRAFO = 26;
-  public static final int VALORETIQUETA = 39;
-  public static final int PARAMETRO = 19;
-  public static final int ACCIONES = 3;
-  public static final int FECHACREACION = 32;
+  public static final int PADRE = 22;
+  public static final int VALORID = 28;
+  public static final int IGUAL = 7;
+  public static final int BORRARSITIO = 10;
+  public static final int ACCION = 5;
+  public static final int IDPARAM = 14;
+  public static final int LITERAL = 27;
+  public static final int ETIQUETA = 23;
+  public static final int PARAMETROSCIERRE = 19;
+  public static final int FECHAMODIFICACION = 16;
+  public static final int NOMBRE = 6;
+  public static final int MAYOR = 3;
+  public static final int EOF = 0;
+  public static final int ETIQUETASCIERRE = 26;
+  public static final int VALORETIQUETA = 25;
+  public static final int USUARIOMODIFICACION = 17;
+  public static final int PARAMETROS = 12;
+  public static final int COMILLA = 8;
   public static final int SITIO = 21;
-  public static final int TEXTO = 40;
-  public static final int ETIQUETA = 36;
-  public static final int ALTURA = 44;
-  public static final int AGREGARCOMPONENTE = 15;
-  public static final int BORRARSITIO = 11;
+  public static final int error = 1;
+  public static final int DIAGONAL = 4;
+  public static final int CREARSITIO = 9;
+  public static final int PARAMETRO = 13;
+  public static final int NUEVAPAGINA = 11;
+  public static final int VALORFECHA = 29;
+  public static final int DATOETIQUETA = 30;
+  public static final int TITULO = 20;
+  public static final int CONTENIDOETIQUETA = 24;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "MENOR",
-  "ACCIONES",
   "MAYOR",
   "DIAGONAL",
   "ACCION",
@@ -73,40 +52,21 @@ public interface ParserXMLSym {
   "CREARSITIO",
   "BORRARSITIO",
   "NUEVAPAGINA",
-  "BORRARPAGINA",
-  "MODIFICARPAGINA",
-  "AGREGARCOMPONENTE",
-  "ELIMINARCOMPONENTE",
-  "MODIFICARCOMPONENTE",
   "PARAMETROS",
   "PARAMETRO",
+  "IDPARAM",
+  "USUARIOCREACION",
+  "FECHAMODIFICACION",
+  "USUARIOMODIFICACION",
+  "FECHACREACION",
+  "PARAMETROSCIERRE",
   "TITULO",
   "SITIO",
   "PADRE",
-  "PAGINA",
-  "CLASE",
-  "TITULOC",
-  "PARRAFO",
-  "IMAGEN",
-  "MENU",
-  "VIDEO",
-  "IDPARAM",
-  "USUARIOCREACION",
-  "FECHACREACION",
-  "FECHAMODIFICACION",
-  "USUARIOMODIFICACION",
-  "ETIQUETAS",
   "ETIQUETA",
-  "ATRIBUTOS",
-  "ATRIBUTO",
-  "VALORETIQUETA",
-  "TEXTO",
-  "ALINEACION",
-  "COLOR",
-  "ORIGEN",
-  "ALTURA",
-  "ANCHO",
   "CONTENIDOETIQUETA",
+  "VALORETIQUETA",
+  "ETIQUETASCIERRE",
   "LITERAL",
   "VALORID",
   "VALORFECHA",

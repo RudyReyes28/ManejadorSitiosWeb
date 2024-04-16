@@ -46,9 +46,11 @@ newline = [\n]
 {whitespace} {/* ignore */}
 {newline} {/* ignore */}
 
-"<" "etiquetas" ">"     {return new Symbol(ParserXMLSym.CONTENIDOETIQUETA);}
+"<"{whitespace}*"/"{whitespace}*"parametros"{whitespace}*">" {return new Symbol(ParserXMLSym.PARAMETROSCIERRE);}
+"<"{whitespace}*"/"{whitespace}*"etiquetas"{whitespace}*">"    {return new Symbol(ParserXMLSym.ETIQUETASCIERRE);}
+"<"{whitespace}*"etiquetas"{whitespace}*">"     {return new Symbol(ParserXMLSym.CONTENIDOETIQUETA);}
 "<"                     {return new Symbol(ParserXMLSym.MENOR);}
-"acciones"              {return new Symbol(ParserXMLSym.ACCIONES);}
+//"acciones"              {return new Symbol(ParserXMLSym.ACCIONES);}
 ">"                     {return new Symbol(ParserXMLSym.MAYOR);}
 "/"                     {return new Symbol(ParserXMLSym.DIAGONAL);}
 "accion"                {return new Symbol(ParserXMLSym.ACCION);}
@@ -58,39 +60,39 @@ newline = [\n]
 "NUEVO_SITIO_WEB"       {return new Symbol(ParserXMLSym.CREARSITIO);}
 "BORRAR_SITIO_WEB"      {return new Symbol(ParserXMLSym.BORRARSITIO);}
 "NUEVA_PAGINA"          {return new Symbol(ParserXMLSym.NUEVAPAGINA);}
-"BORRAR_PAGINA"         {return new Symbol(ParserXMLSym.BORRARPAGINA);}
-"MODIFICAR_PAGINA"      {return new Symbol(ParserXMLSym.MODIFICARPAGINA);}
-"AGREGAR_COMPONENTE"    {return new Symbol(ParserXMLSym.AGREGARCOMPONENTE);}
-"BORRAR_COMPONENTE"     {return new Symbol(ParserXMLSym.ELIMINARCOMPONENTE);}
-"MODIFICAR_COMPONENTE"  {return new Symbol(ParserXMLSym.MODIFICARCOMPONENTE);}
+//"BORRAR_PAGINA"         {return new Symbol(ParserXMLSym.BORRARPAGINA);}
+//"MODIFICAR_PAGINA"      {return new Symbol(ParserXMLSym.MODIFICARPAGINA);}
+//"AGREGAR_COMPONENTE"    {return new Symbol(ParserXMLSym.AGREGARCOMPONENTE);}
+//"BORRAR_COMPONENTE"     {return new Symbol(ParserXMLSym.ELIMINARCOMPONENTE);}
+//"MODIFICAR_COMPONENTE"  {return new Symbol(ParserXMLSym.MODIFICARCOMPONENTE);}
 "parametros"            {return new Symbol(ParserXMLSym.PARAMETROS);}
 "parametro"             {return new Symbol(ParserXMLSym.PARAMETRO);}
 "TITULO"                {return new Symbol(ParserXMLSym.TITULO);}
 "SITIO"                 {return new Symbol(ParserXMLSym.SITIO);}
 "PADRE"                 {return new Symbol(ParserXMLSym.PADRE);}
-"PAGINA"                {return new Symbol(ParserXMLSym.PAGINA);}
-"CLASE"                 {return new Symbol(ParserXMLSym.CLASE);}
-"[""TITULO""]"          {return new Symbol(ParserXMLSym.TITULOC);}
-"[""PARRAFO""]"         {return new Symbol(ParserXMLSym.PARRAFO);}
-"[""IMAGEN""]"          {return new Symbol(ParserXMLSym.IMAGEN);}
-"[""MENU""]"            {return new Symbol(ParserXMLSym.MENU);}
-"[""VIDEO""]"           {return new Symbol(ParserXMLSym.VIDEO);}
+//"PAGINA"                {return new Symbol(ParserXMLSym.PAGINA);}
+//"CLASE"                 {return new Symbol(ParserXMLSym.CLASE);}
+//"[""TITULO""]"          {return new Symbol(ParserXMLSym.TITULOC);}
+//"[""PARRAFO""]"         {return new Symbol(ParserXMLSym.PARRAFO);}
+//"[""IMAGEN""]"          {return new Symbol(ParserXMLSym.IMAGEN);}
+//"[""MENU""]"            {return new Symbol(ParserXMLSym.MENU);}
+//"[""VIDEO""]"           {return new Symbol(ParserXMLSym.VIDEO);}
 "ID"                    {return new Symbol(ParserXMLSym.IDPARAM);}
 "USUARIO_CREACION"      {return new Symbol(ParserXMLSym.USUARIOCREACION);}
 "FECHA_CREACION"        {return new Symbol(ParserXMLSym.FECHACREACION);}
 "FECHA_MODIFICACION"    {return new Symbol(ParserXMLSym.FECHAMODIFICACION);}
 "USUARIO_MODIFICACION"  {return new Symbol(ParserXMLSym.USUARIOMODIFICACION);}
-"etiquetas"             {return new Symbol(ParserXMLSym.ETIQUETAS);}
+//"etiquetas"             {return new Symbol(ParserXMLSym.ETIQUETAS);}
 "etiqueta"              {return new Symbol(ParserXMLSym.ETIQUETA);}
-"atributos"             {return new Symbol(ParserXMLSym.ATRIBUTOS);}
-"atributo"              {return new Symbol(ParserXMLSym.ATRIBUTO);}
+//"atributos"             {return new Symbol(ParserXMLSym.ATRIBUTOS);}
+//"atributo"              {return new Symbol(ParserXMLSym.ATRIBUTO);}
 "valor"                 {return new Symbol(ParserXMLSym.VALORETIQUETA);}
-"TEXTO"                 {return new Symbol(ParserXMLSym.TEXTO);}
-"ALINEACION"            {return new Symbol(ParserXMLSym.ALINEACION);}
-"COLOR"                 {return new Symbol(ParserXMLSym.COLOR);}
-"ORIGEN"                {return new Symbol(ParserXMLSym.ORIGEN);}
-"ALTURA"                {return new Symbol(ParserXMLSym.ALTURA);}
-"ANCHO"                 {return new Symbol(ParserXMLSym.ANCHO);}
+//"TEXTO"                 {return new Symbol(ParserXMLSym.TEXTO);}
+//"ALINEACION"            {return new Symbol(ParserXMLSym.ALINEACION);}
+//"COLOR"                 {return new Symbol(ParserXMLSym.COLOR);}
+//"ORIGEN"                {return new Symbol(ParserXMLSym.ORIGEN);}
+//"ALTURA"                {return new Symbol(ParserXMLSym.ALTURA);}
+//"ANCHO"                 {return new Symbol(ParserXMLSym.ANCHO);}
 
 
 "["{especiales}({letter}|{number}|{especiales})* "]" { return symbol(ParserXMLSym.VALORID, yytext()); }
