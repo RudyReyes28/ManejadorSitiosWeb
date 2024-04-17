@@ -28,5 +28,8 @@ public class BorrarPaginaWeb {
         this.idPagina = QuitarCorchetes.quitarCorchetes(idPagina);
     }
     
+    public void imprimirBorrarPagina(){
+        System.out.println("Borrar Pagina: "+this.idPagina);
+    }
     
 }

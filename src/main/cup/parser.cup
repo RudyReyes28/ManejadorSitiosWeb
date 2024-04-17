@@ -3,11 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java_cup.runtime.*;
 import com.rudyreyes.manejadorweb.modelo.componente.*;
+import com.rudyreyes.manejadorweb.modelo.paginaweb.*;
+import com.rudyreyes.manejadorweb.modelo.sitioweb.*;
 class ParserXML;
 
 parser code {:
     Componente nuevoComponente = new Componente();
     EliminarComponente elimComponente = new EliminarComponente();
+    PaginaWeb nuevaPagina = new PaginaWeb();
+    SitioWeb nuevoSitio = new SitioWeb();
     List<Object> listaAcciones = new ArrayList<>();
 
 
@@ -37,20 +41,80 @@ non terminal atributo, tipo_param_agregar_co, parametros_eliminar_componente;
 non terminal parametro_lista_eliminar_co, parametro_eliminar_co, tipo_param_eliminar_co;
 non terminal parametros_modificar_componente;
 non terminal parametro_lista_nueva_pagina, parametro_nueva_pagina, tipo_param_nueva_pagina, etiquetas, etiqueta;
-non terminal parametro_crear_sitio, tipo_param_crear_sitio, parametro_tipo_usuario_creacion;
-non terminal parametro_tipo_fecha_creacion, parametro_tipo_fecha_mod, parametro_tipo_usuario_mod, empty;
-non terminal String valor_atributo, parametro_tipo_id, tipo_clase;
+non terminal parametro_crear_sitio, tipo_param_crear_sitio, empty;
+non terminal String valor_atributo, parametro_tipo_id, tipo_clase, parametro_tipo_usuario_creacion;
+non terminal String parametro_tipo_fecha_creacion, parametro_tipo_fecha_mod, parametro_tipo_usuario_mod;
 start with accion;
 
 accion ::= MENOR ACCION NOMBRE IGUAL  COMILLA tipo_accion 
 	|accion MENOR ACCION NOMBRE IGUAL  COMILLA tipo_accion
         ;
 			
-tipo_accion ::= CREARSITIO COMILLA MAYOR parametros_crear_sitio MENOR DIAGONAL ACCION MAYOR
-            | BORRARSITIO COMILLA MAYOR parametros_borrar_sitio MENOR DIAGONAL ACCION MAYOR
-            | NUEVAPAGINA COMILLA MAYOR parametros_nueva_pagina etiquetas MENOR DIAGONAL ACCION MAYOR
-            | BORRARPAGINA COMILLA MAYOR parametros_borrar_pagina MENOR DIAGONAL ACCION MAYOR
-            | MODIFICARPAGINA COMILLA MAYOR parametros_modificar_pagina etiquetas MENOR DIAGONAL ACCION MAYOR
+tipo_accion ::= CREARSITIO COMILLA MAYOR parametros_crear_sitio MENOR DIAGONAL ACCION MAYOR{:
+                    SitioWeb enviarSitio = new SitioWeb();
+                    enviarSitio.setIdSitioSinCorchetes(nuevoSitio.getIdSitio());
+                    enviarSitio.setUsuarioCreacionSinCorchetes(nuevoSitio.getUsuarioCreacion());
+                    enviarSitio.setFechaCreacionSinCorchetes(nuevoSitio.getFechaCreacion());
+                    enviarSitio.setFechaModificacionSinCorchetes(nuevoSitio.getFechaModificacion());
+                    enviarSitio.setUsuarioModificacionSinCorchetes(nuevoSitio.getUsuarioModificacion());
+				
+				
+                    listaAcciones.add(enviarSitio);
+				
+                    nuevoSitio = new SitioWeb();
+	
+			:}
+            | BORRARSITIO COMILLA MAYOR parametros_borrar_sitio MENOR DIAGONAL ACCION MAYOR{:
+		BorrarSitioWeb enviarBorrarSitio = new BorrarSitioWeb(nuevoSitio.getIdSitio());
+		listaAcciones.add(enviarBorrarSitio);
+				
+		nuevoSitio = new SitioWeb();
+				
+		:}
+            | NUEVAPAGINA COMILLA MAYOR parametros_nueva_pagina etiquetas MENOR DIAGONAL ACCION MAYOR{:
+		PaginaWeb enviarPagina = new PaginaWeb();
+		enviarPagina.setIdPaginaSinCorchetes(nuevaPagina.getIdPagina());
+		enviarPagina.setTituloSinCorchetes(nuevaPagina.getTitulo());
+		enviarPagina.setSitioSinCorchetes(nuevaPagina.getSitio());
+		enviarPagina.setIdPadreCorchetes(nuevaPagina.getIdPadre());
+		enviarPagina.setUsuarioCreacionSinCorchetes(nuevaPagina.getUsuarioCreacion());
+		enviarPagina.setFechaCreacionSinCorchetes(nuevaPagina.getFechaCreacion());
+		enviarPagina.setFechaModificacionSinCorchetes(nuevaPagina.getFechaModificacion());
+		enviarPagina.setUsuarioModificacionSinCorchetes(nuevaPagina.getUsuarioModificacion());
+				
+		List<String> listaEtiquetas = new ArrayList<>(nuevaPagina.getEtiquetas());
+		enviarPagina.setEtiquetas(listaEtiquetas);
+		listaAcciones.add(enviarPagina);
+				
+		nuevaPagina = new PaginaWeb();
+			
+		:}
+            | BORRARPAGINA COMILLA MAYOR parametros_borrar_pagina MENOR DIAGONAL ACCION MAYOR{:
+		BorrarPaginaWeb enviarBorrarPagina = new BorrarPaginaWeb(nuevaPagina.getIdPagina());
+		listaAcciones.add(enviarBorrarPagina);
+				
+		nuevaPagina = new PaginaWeb();
+				
+		:}
+            | MODIFICARPAGINA COMILLA MAYOR parametros_modificar_pagina etiquetas MENOR DIAGONAL ACCION MAYOR{:
+		ModificarPagina enviarPaginaMod = new ModificarPagina();
+		enviarPaginaMod.setIdPaginaSinCorchetes(nuevaPagina.getIdPagina());
+		enviarPaginaMod.setTituloSinCorchetes(nuevaPagina.getTitulo());
+		enviarPaginaMod.setSitioSinCorchetes(nuevaPagina.getSitio());
+		enviarPaginaMod.setIdPadreCorchetes(nuevaPagina.getIdPadre());
+		enviarPaginaMod.setUsuarioCreacionSinCorchetes(nuevaPagina.getUsuarioCreacion());
+		enviarPaginaMod.setFechaCreacionSinCorchetes(nuevaPagina.getFechaCreacion());
+		enviarPaginaMod.setFechaModificacionSinCorchetes(nuevaPagina.getFechaModificacion());
+		enviarPaginaMod.setUsuarioModificacionSinCorchetes(nuevaPagina.getUsuarioModificacion());
+				
+		List<String> listaEtiquetas = new ArrayList<>(nuevaPagina.getEtiquetas());
+		enviarPaginaMod.setEtiquetas(listaEtiquetas);
+		listaAcciones.add(enviarPaginaMod);
+				
+		nuevaPagina = new PaginaWeb();
+			
+		:}
+
             | AGREGARCOMPONENTE COMILLA MAYOR parametros_agregar_componente atributos MENOR DIAGONAL ACCION MAYOR{:
 		Componente enviarComponente = new Componente();
 		enviarComponente.setIdComponenteSinCorchetes(nuevoComponente.getIdComponente());
@@ -95,18 +159,30 @@ parametro_lista_crear_sitio ::= parametro_crear_sitio parametro_lista_crear_siti
 							
 parametro_crear_sitio ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_crear_sitio ;
 
-tipo_param_crear_sitio ::= parametro_tipo_id:pi {:System.out.println("Crear Sitio id: "+pi);:}
-			| parametro_tipo_usuario_creacion:uc {:System.out.println("Crear Sitio Usuario Cre: "+uc);:}
-			| parametro_tipo_fecha_creacion:fc {:System.out.println("Crear Sitio Fecha Cre: "+fc);:}
-			| parametro_tipo_fecha_mod:fm {:System.out.println("Crear Sitio Fecha mod: "+fm);:}
-			| parametro_tipo_usuario_mod:um  {:System.out.println("Crear Sitio Usuario mod: "+um);:}
+tipo_param_crear_sitio ::= parametro_tipo_id:pi {:
+				nuevoSitio.setIdSitio(pi);
+			:}
+			| parametro_tipo_usuario_creacion:uc {:
+				nuevoSitio.setUsuarioCreacion(uc);
+			:}
+			| parametro_tipo_fecha_creacion:fc {:
+				nuevoSitio.setFechaCreacion(fc);
+			:}
+			| parametro_tipo_fecha_mod:fm {:
+				nuevoSitio.setFechaModificacion(fm);
+			:}
+			| parametro_tipo_usuario_mod:um  {:
+				nuevoSitio.setUsuarioModificacion(um);
+			:}
 			;
 			
 /*PARAMETROS PARA BORRAR SITIOS WEB*/
 
 parametros_borrar_sitio ::= MENOR PARAMETROS MAYOR parametro_borrar_sitio PARAMETROSCIERRE;
 
-parametro_borrar_sitio ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA parametro_tipo_id:pi {:System.out.println("Borrar Sitio: "+pi);:};
+parametro_borrar_sitio ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA parametro_tipo_id:pi {:
+                        nuevoSitio.setIdSitio(pi);
+                        :};
 
 /*PARAMETROS PARA CREAR UNA NUEVA PAGINA*/
 
@@ -117,21 +193,39 @@ parametro_lista_nueva_pagina ::= parametro_nueva_pagina parametro_lista_nueva_pa
 							
 parametro_nueva_pagina ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_nueva_pagina;						
 							
-tipo_param_nueva_pagina ::= parametro_tipo_id:pi {:System.out.println("Crear pagina id: "+pi);:}
-			| TITULO COMILLA MAYOR  LITERAL:li  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Crear pagina titulo: "+li);:}
-			| SITIO COMILLA MAYOR  VALORID:id  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Crear pagina sitio: "+id);:}
-			| PADRE COMILLA MAYOR  VALORID:pa  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Crear pagina padre: "+pa);:}
-			| parametro_tipo_usuario_creacion:uc {:System.out.println("Crear pagina Usuario Cre: "+uc);:}
-			| parametro_tipo_fecha_creacion:fc {:System.out.println("Crear pag Fecha Cre: "+fc);:}
-			| parametro_tipo_fecha_mod:fm {:System.out.println("Crear pag Fecha mod: "+fm);:}
-			| parametro_tipo_usuario_mod:um  {:System.out.println("Crear pag Usuario mod: "+um);:}
+tipo_param_nueva_pagina ::= parametro_tipo_id:pi {:
+				nuevaPagina.setIdPagina(pi);
+			:}
+			| TITULO COMILLA MAYOR  LITERAL:li  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevaPagina.setTitulo(li);
+			:}
+			| SITIO COMILLA MAYOR  VALORID:id  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevaPagina.setSitio(id);
+			:}
+			| PADRE COMILLA MAYOR  VALORID:pa  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevaPagina.setIdPadre(pa);
+			:}
+			| parametro_tipo_usuario_creacion:uc {:
+				nuevaPagina.setUsuarioCreacion(uc);
+			:}
+			| parametro_tipo_fecha_creacion:fc {:
+				nuevaPagina.setFechaCreacion(fc);
+			:}
+			| parametro_tipo_fecha_mod:fm {:
+				nuevaPagina.setFechaModificacion(fm);
+			:}
+			| parametro_tipo_usuario_mod:um  {:
+				nuevaPagina.setUsuarioModificacion(um);
+			:}
 			;
 
 /*PARAMETROS PARA ELIMINAR PAGINA*/
 
 parametros_borrar_pagina ::= MENOR PARAMETROS MAYOR parametro_borrar_pagina PARAMETROSCIERRE;
 
-parametro_borrar_pagina ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA parametro_tipo_id:pi {:System.out.println("Borrar pag: "+pi);:};
+parametro_borrar_pagina ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA parametro_tipo_id:pi {:
+	nuevaPagina.setIdPagina(pi);
+:};
 					
 
 /*PARAMETROS MODIFICAR PAGINA*/
@@ -144,9 +238,31 @@ parametro_lista_modificar_pagina ::= parametro_modificar_pagina parametro_lista_
 
 parametro_modificar_pagina ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_modificar_pagina ;
 
-tipo_param_modificar_pagina ::= parametro_tipo_id:pi {:System.out.println("Mod pagina id: "+pi);:}
-				| TITULO COMILLA MAYOR  LITERAL:li  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Mod pagina titulo: "+li);:}
-				;					
+tipo_param_modificar_pagina ::= parametro_tipo_id:pi {:
+				nuevaPagina.setIdPagina(pi);
+			:}
+			| TITULO COMILLA MAYOR  LITERAL:li  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevaPagina.setTitulo(li);
+			:}
+			| SITIO COMILLA MAYOR  VALORID:id  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevaPagina.setSitio(id);
+			:}
+			| PADRE COMILLA MAYOR  VALORID:pa  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevaPagina.setIdPadre(pa);
+			:}
+			| parametro_tipo_usuario_creacion:uc {:
+				nuevaPagina.setUsuarioCreacion(uc);
+			:}
+			| parametro_tipo_fecha_creacion:fc {:
+				nuevaPagina.setFechaCreacion(fc);
+			:}
+			| parametro_tipo_fecha_mod:fm {:
+				nuevaPagina.setFechaModificacion(fm);
+			:}
+			| parametro_tipo_usuario_mod:um  {:
+				nuevaPagina.setUsuarioModificacion(um);
+			:}
+			;					
 					
 /*PARAMETROS PARA AGREGAR COMPONENTES*/
 
@@ -214,8 +330,12 @@ parametro_tipo_usuario_mod ::= USUARIOMODIFICACION COMILLA MAYOR  VALORID:u  MEN
 etiquetas ::= CONTENIDOETIQUETA etiqueta  ETIQUETASCIERRE
             |empty
 	;
-etiqueta ::= MENOR ETIQUETA VALORETIQUETA IGUAL COMILLA DATOETIQUETA:et1 COMILLA DIAGONAL MAYOR etiqueta {:System.out.println("Etiqueta: "+et1);:}
-	|  MENOR ETIQUETA VALORETIQUETA IGUAL COMILLA DATOETIQUETA:et2 COMILLA DIAGONAL MAYOR {:System.out.println("Etiqueta: "+et2);:}
+etiqueta ::= MENOR ETIQUETA VALORETIQUETA IGUAL COMILLA DATOETIQUETA:et1 COMILLA DIAGONAL MAYOR etiqueta {:
+		nuevaPagina.setEtiqueta(et1);
+	:}
+	|  MENOR ETIQUETA VALORETIQUETA IGUAL COMILLA DATOETIQUETA:et2 COMILLA DIAGONAL MAYOR {:
+		nuevaPagina.setEtiqueta(et2);
+	:}
 	;
 
 		

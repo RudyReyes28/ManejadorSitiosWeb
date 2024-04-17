@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.rudyreyes.manejadorweb.modelo.paginaweb;
+package com.rudyreyes.manejadorweb.modelo.sitioweb;
 
+import com.rudyreyes.manejadorweb.modelo.paginaweb.PaginaWeb;
 import com.rudyreyes.manejadorweb.modelo.util.QuitarCorchetes;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,75 +13,44 @@ import java.util.List;
  *
  * @author rudyo
  */
-public class ModificarPagina {
-    private String idPagina;
-    private String titulo;
-    private String sitio;
-    private String idPadre;
+public class SitioWeb {
+    private String idSitio;
+    
     private String usuarioCreacion;
     private String fechaCreacion;
     private String fechaModificacion;
     private String usuarioModificacion;
-    List<String> etiquetas;
+    List<PaginaWeb> paginasWeb;
 
-    public ModificarPagina() {
-        etiquetas = new ArrayList<>();
+    public SitioWeb() {
+        this.paginasWeb = new ArrayList<>();
     }
 
-    public ModificarPagina(String idPagina, String titulo, List<String> etiquetas) {
-        this.idPagina = idPagina;
-        this.titulo = titulo;
-        this.etiquetas = etiquetas;
+    public String getIdSitio() {
+        return idSitio;
     }
 
-    public String getIdPagina() {
-        return idPagina;
-    }
-
-    public void setIdPagina(String idPagina) {
-        this.idPagina = QuitarCorchetes.quitarCorchetes(idPagina);
+    public void setIdSitio(String idSitio) {
+        this.idSitio = QuitarCorchetes.quitarCorchetes(idSitio);
     }
     
-    public void setIdPaginaSinCorchetes(String idPagina) {
-        this.idPagina = idPagina;
+    public void setIdSitioSinCorchetes(String idSitio) {
+        this.idSitio = idSitio;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public List<PaginaWeb> getPaginasWeb() {
+        return paginasWeb;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = QuitarCorchetes.quitarCorchetes(titulo);
+    public void setPaginasWeb(List<PaginaWeb> paginasWeb) {
+        this.paginasWeb = paginasWeb;
     }
     
-    public void setTituloSinCorchetes(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getSitio() {
-        return sitio;
-    }
-
-    public void setSitio(String sitio) {
-        this.sitio = QuitarCorchetes.quitarCorchetes(sitio);
+    public void setPaginaWeb(PaginaWeb paginaWeb){
+        this.paginasWeb.add(paginaWeb);
     }
     
-    public void setSitioSinCorchetes(String sitio) {
-        this.sitio = sitio;
-    }
-
-    public String getIdPadre() {
-        return idPadre;
-    }
-
-    public void setIdPadre(String idPadre) {
-        this.idPadre = QuitarCorchetes.quitarCorchetes(idPadre);
-    }
     
-    public void setIdPadreCorchetes(String idPadre) {
-        this.idPadre = idPadre;
-    }
-
     public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
@@ -128,35 +98,19 @@ public class ModificarPagina {
     public void setUsuarioModificacionSinCorchetes(String usuarioModificacion) {
         this.usuarioModificacion = usuarioModificacion;
     }
-
-    public List<String> getEtiquetas() {
-        return etiquetas;
-    }
-
-    public void setEtiquetas(List<String> etiquetas) {
-        this.etiquetas = etiquetas;
-    }
     
-    public void setEtiqueta(String etiqueta) {
-        this.etiquetas.add(etiqueta);
-    }
-    
-    public void imprimirPagina(){
-        System.out.println("Pagina a modificar");
-        System.out.println("idPagina: "+idPagina);
-        System.out.println("titulo: "+titulo);
-        System.out.println("sitio: "+sitio);
-        System.out.println("idPadre: "+idPadre);
+    public void imprimirSitio(){
+        System.out.println("Sitio Web");
+        System.out.println("idSitio: "+idSitio);
         System.out.println("usuarioCreacion: "+usuarioCreacion);
         System.out.println("fechaCreacion: "+fechaCreacion);
         System.out.println("fechaModificacion: "+fechaModificacion);
         System.out.println("usuarioModificacion: "+usuarioModificacion);
         
-        
-        for(String at: etiquetas){
-            System.out.println("Etiqueta: "+at);
+        for(PaginaWeb pag: paginasWeb){
+            pag.imprimirPagina();
         }
+        
     }
-   
     
 }
