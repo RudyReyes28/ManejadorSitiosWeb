@@ -5,7 +5,10 @@
 
 package com.rudyreyes.manejadorweb;
 
+import java.util.ArrayList;
+import java.util.List;
 import java_cup.runtime.*;
+import com.rudyreyes.manejadorweb.modelo.componente.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -35,28 +38,28 @@ public class ParserXML extends java_cup.runtime.lr_parser {
     "\011\000\002\003\012\000\002\003\012\000\002\003\013" +
     "\000\002\003\012\000\002\003\013\000\002\003\013\000" +
     "\002\003\012\000\002\003\013\000\002\004\007\000\002" +
-    "\007\004\000\002\007\003\000\002\042\010\000\002\043" +
-    "\003\000\002\043\003\000\002\043\003\000\002\043\003" +
-    "\000\002\043\003\000\002\005\007\000\002\010\010\000" +
-    "\002\011\007\000\002\035\004\000\002\035\003\000\002" +
-    "\036\010\000\002\037\003\000\002\037\012\000\002\037" +
-    "\012\000\002\037\012\000\002\037\003\000\002\037\003" +
-    "\000\002\037\003\000\002\037\003\000\002\006\007\000" +
+    "\007\004\000\002\007\003\000\002\040\010\000\002\041" +
+    "\003\000\002\041\003\000\002\041\003\000\002\041\003" +
+    "\000\002\041\003\000\002\005\007\000\002\010\010\000" +
+    "\002\011\007\000\002\033\004\000\002\033\003\000\002" +
+    "\034\010\000\002\035\003\000\002\035\012\000\002\035" +
+    "\012\000\002\035\012\000\002\035\003\000\002\035\003" +
+    "\000\002\035\003\000\002\035\003\000\002\006\007\000" +
     "\002\012\010\000\002\013\007\000\002\015\004\000\002" +
     "\015\003\000\002\014\010\000\002\016\003\000\002\016" +
-    "\012\000\002\017\007\000\002\030\007\000\002\031\004" +
-    "\000\002\031\003\000\002\032\010\000\002\033\003\000" +
-    "\002\033\012\000\002\034\007\000\002\020\004\000\002" +
-    "\020\003\000\002\021\010\000\002\027\003\000\002\027" +
-    "\012\000\002\027\012\000\002\022\003\000\002\022\003" +
-    "\000\002\022\003\000\002\022\003\000\002\022\003\000" +
-    "\002\044\012\000\002\045\012\000\002\046\012\000\002" +
-    "\047\012\000\002\050\012\000\002\040\005\000\002\040" +
-    "\003\000\002\041\014\000\002\041\013\000\002\023\007" +
-    "\000\002\024\004\000\002\024\003\000\002\025\017\000" +
-    "\002\026\003\000\002\026\003\000\002\026\003\000\002" +
-    "\026\003\000\002\026\003\000\002\026\003\000\002\026" +
-    "\003\000\002\026\003\000\002\051\002" });
+    "\012\000\002\017\007\000\002\026\007\000\002\027\004" +
+    "\000\002\027\003\000\002\030\010\000\002\031\003\000" +
+    "\002\031\012\000\002\032\007\000\002\020\004\000\002" +
+    "\020\003\000\002\021\010\000\002\025\003\000\002\025" +
+    "\012\000\002\025\012\000\002\051\003\000\002\051\003" +
+    "\000\002\051\003\000\002\051\003\000\002\051\003\000" +
+    "\002\050\012\000\002\042\012\000\002\043\012\000\002" +
+    "\044\012\000\002\045\012\000\002\036\005\000\002\036" +
+    "\003\000\002\037\014\000\002\037\013\000\002\022\007" +
+    "\000\002\023\004\000\002\023\003\000\002\024\017\000" +
+    "\002\047\003\000\002\047\003\000\002\047\003\000\002" +
+    "\047\003\000\002\047\003\000\002\047\003\000\002\047" +
+    "\003\000\002\047\003\000\002\046\002" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -245,29 +248,29 @@ public class ParserXML extends java_cup.runtime.lr_parser {
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\004\013\024" +
-    "\001\001\000\006\040\065\051\064\001\001\000\002\001" +
+    "\001\001\000\006\036\065\046\064\001\001\000\002\001" +
     "\001\000\002\001\001\000\006\014\032\015\030\001\001" +
     "\000\002\001\001\000\002\001\001\000\006\014\032\015" +
     "\033\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\006\016\041\044\042\001" +
+    "\001\001\000\002\001\001\000\006\016\041\050\042\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\041\072\001\001\000\002\001\001\000\002\001\001" +
+    "\004\037\072\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\041\104\001\001\000\002\001\001\000\002\001" +
+    "\000\004\037\104\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\004\017\111\001\001\000\002" +
-    "\001\001\000\004\023\112\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\024\116\025\117" +
-    "\001\001\000\002\001\001\000\006\024\145\025\117\001" +
+    "\001\001\000\004\022\112\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\023\116\024\117" +
+    "\001\001\000\002\001\001\000\006\023\145\024\117\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\026\133\001\001\000\002\001" +
+    "\000\002\001\001\000\004\047\133\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
@@ -277,32 +280,32 @@ public class ParserXML extends java_cup.runtime.lr_parser {
     "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
     "\020\155\021\156\001\001\000\002\001\001\000\006\020" +
     "\213\021\156\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\027\164\044" +
+    "\000\002\001\001\000\002\001\001\000\006\025\164\050" +
     "\165\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\022" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\051" +
     "\173\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\034\217\001\001\000\004" +
-    "\023\225\001\001\000\002\001\001\000\002\001\001\000" +
+    "\001\000\002\001\001\000\004\032\217\001\001\000\004" +
+    "\022\225\001\001\000\002\001\001\000\002\001\001\000" +
     "\006\020\223\021\156\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\004\005\234\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\004\010\240\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\044\246\001\001\000\002" +
+    "\001\000\002\001\001\000\004\050\246\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\011\256\001\001\000\006\040\371\051\064\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\035\264" +
-    "\036\262\001\001\000\006\035\370\036\262\001\001\000" +
+    "\000\004\011\256\001\001\000\006\036\371\046\064\001" +
+    "\001\000\002\001\001\000\002\001\001\000\006\033\264" +
+    "\034\262\001\001\000\006\033\370\034\262\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\016\037" +
-    "\305\044\272\045\301\046\276\047\303\050\306\001\001" +
+    "\001\001\000\002\001\001\000\002\001\001\000\016\035" +
+    "\305\042\301\043\276\044\303\045\306\050\272\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
@@ -324,12 +327,12 @@ public class ParserXML extends java_cup.runtime.lr_parser {
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\030\u0100\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\031\u0104\032" +
+    "\002\001\001\000\004\026\u0100\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\027\u0104\030" +
     "\u0106\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\031\u0107\032\u0106\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\033\u010e" +
-    "\044\u010c\001\001\000\002\001\001\000\002\001\001\000" +
+    "\027\u0107\030\u0106\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\006\031\u010e" +
+    "\050\u010c\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
@@ -339,14 +342,14 @@ public class ParserXML extends java_cup.runtime.lr_parser {
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
     "\012\u0125\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\044\u012b\001\001\000\002\001\001\000\002\001\001\000" +
+    "\050\u012b\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\004\004\u0130\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\007\u0137\042\u0139\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\007\u013a\042\u0139\001\001\000\002\001\001" +
+    "\007\u0137\040\u0139\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\007\u013a\040\u0139\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\016\043\u013f\044\u0140\045\u0142\046\u0141\047\u0143\050\u0144" +
+    "\016\041\u013f\042\u0142\043\u0141\044\u0143\045\u0144\050\u0140" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
@@ -387,6 +390,18 @@ public class ParserXML extends java_cup.runtime.lr_parser {
 
   /** <code>error</code> Symbol index. */
   public int error_sym() {return 1;}
+
+
+
+    Componente nuevoComponente = new Componente();
+    EliminarComponente elimComponente = new EliminarComponente();
+    List<Object> listaAcciones = new ArrayList<>();
+
+
+    List<Object> obtenerAcciones(){
+        return listaAcciones;
+    }
+    
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -494,7 +509,17 @@ class CUP$ParserXML$actions {
           case 8: // tipo_accion ::= AGREGARCOMPONENTE COMILLA MAYOR parametros_agregar_componente atributos MENOR DIAGONAL ACCION MAYOR 
             {
               Object RESULT =null;
+		
+		Componente enviarComponente = new Componente();
+		enviarComponente.setIdComponenteSinCorchetes(nuevoComponente.getIdComponente());
+		enviarComponente.setIdPaginaSinCorchetes(nuevoComponente.getIdPagina());
+		enviarComponente.setClaseComponente(nuevoComponente.getClaseComponente());
+		List<Atributo> listaAtributos =  new ArrayList<>(nuevoComponente.getListaAtributos());
+                enviarComponente.setListaAtributos(listaAtributos);
+		listaAcciones.add(enviarComponente);
 
+                nuevoComponente = new Componente();
+		
               CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_accion",1, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-8)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
@@ -503,7 +528,14 @@ class CUP$ParserXML$actions {
           case 9: // tipo_accion ::= ELIMINARCOMPONENTE COMILLA MAYOR parametros_eliminar_componente MENOR DIAGONAL ACCION MAYOR 
             {
               Object RESULT =null;
+		
+		EliminarComponente componenteElim = new EliminarComponente();
+		componenteElim.setIdComponenteSinCorchetes(elimComponente.getIdComponente());
+		componenteElim.setIdPaginaSinCorchetes(elimComponente.getIdPagina());
+		listaAcciones.add(componenteElim);
 
+                elimComponente = new EliminarComponente();
+		
               CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_accion",1, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
@@ -512,7 +544,18 @@ class CUP$ParserXML$actions {
           case 10: // tipo_accion ::= MODIFICARCOMPONENTE COMILLA MAYOR parametros_modificar_componente atributos MENOR DIAGONAL ACCION MAYOR 
             {
               Object RESULT =null;
+		
+		ModificarComponentes modComponente = new ModificarComponentes();
+			
+		modComponente.setIdComponenteSinCorchetes(nuevoComponente.getIdComponente());
+		modComponente.setIdPaginaSinCorchetes(nuevoComponente.getIdPagina());
+		modComponente.setClaseComponente(nuevoComponente.getClaseComponente());
+		List<Atributo> listaAtributos =  new ArrayList<>(nuevoComponente.getListaAtributos());
+                modComponente.setListaAtributos(listaAtributos);
+		listaAcciones.add(modComponente);
 
+                nuevoComponente = new Componente();
+		
               CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_accion",1, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-8)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
@@ -549,7 +592,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_crear_sitio",32, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_crear_sitio",30, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -559,9 +602,9 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object pi = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear Sitio id: "+pi);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",33, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -573,7 +616,7 @@ class CUP$ParserXML$actions {
 		int ucright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object uc = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear Sitio Usuario Cre: "+uc);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",33, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -585,7 +628,7 @@ class CUP$ParserXML$actions {
 		int fcright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object fc = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear Sitio Fecha Cre: "+fc);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",33, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -597,7 +640,7 @@ class CUP$ParserXML$actions {
 		int fmright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object fm = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear Sitio Fecha mod: "+fm);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",33, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -609,7 +652,7 @@ class CUP$ParserXML$actions {
 		int umright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object um = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear Sitio Usuario mod: "+um);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",33, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_crear_sitio",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -628,7 +671,7 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object pi = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Borrar Sitio: "+pi);
               CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_borrar_sitio",6, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
@@ -648,7 +691,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-1)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_nueva_pagina",25, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-1)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -657,7 +700,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_nueva_pagina",25, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -666,7 +709,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_nueva_pagina",28, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_nueva_pagina",26, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -676,9 +719,9 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object pi = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear pagina id: "+pi);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -690,7 +733,7 @@ class CUP$ParserXML$actions {
 		int liright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String li = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		System.out.println("Crear pagina titulo: "+li);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -702,7 +745,7 @@ class CUP$ParserXML$actions {
 		int idright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		System.out.println("Crear pagina sitio: "+id);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -714,7 +757,7 @@ class CUP$ParserXML$actions {
 		int paright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String pa = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		System.out.println("Crear pagina padre: "+pa);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -726,7 +769,7 @@ class CUP$ParserXML$actions {
 		int ucright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object uc = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear pagina Usuario Cre: "+uc);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -738,7 +781,7 @@ class CUP$ParserXML$actions {
 		int fcright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object fc = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear pag Fecha Cre: "+fc);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -750,7 +793,7 @@ class CUP$ParserXML$actions {
 		int fmright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object fm = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear pag Fecha mod: "+fm);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -762,7 +805,7 @@ class CUP$ParserXML$actions {
 		int umright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
 		Object um = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Crear pag Usuario mod: "+um);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_nueva_pagina",27, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -781,7 +824,7 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object pi = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Borrar pag: "+pi);
               CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_borrar_pagina",8, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
@@ -829,7 +872,7 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object pi = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
 		System.out.println("Mod pagina id: "+pi);
               CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_modificar_pagina",12, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
@@ -861,7 +904,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametros_eliminar_componente",22, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametros_eliminar_componente",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -870,7 +913,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_eliminar_co",23, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-1)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_eliminar_co",21, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-1)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -879,7 +922,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_eliminar_co",23, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_lista_eliminar_co",21, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -888,7 +931,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_eliminar_co",24, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_eliminar_co",22, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-5)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -898,9 +941,11 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int icleft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int icright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object ic = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
-		System.out.println("Id elim componente: "+ic);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_eliminar_co",25, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+		String ic = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		
+                            elimComponente.setIdComponente(ic);
+                            
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_eliminar_co",23, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -911,8 +956,10 @@ class CUP$ParserXML$actions {
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
-		System.out.println("Id pagina del comp a elim: "+pi);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_eliminar_co",25, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+		
+                            elimComponente.setIdPagina(pi);
+                            
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_eliminar_co",23, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -920,8 +967,8 @@ class CUP$ParserXML$actions {
           case 49: // parametros_modificar_componente ::= MENOR PARAMETROS MAYOR parametro_lista_agregar_co PARAMETROSCIERRE 
             {
               Object RESULT =null;
-		System.out.println("Para modificar componentes");
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametros_modificar_componente",26, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametros_modificar_componente",24, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -958,9 +1005,11 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int icleft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).left;
 		int icright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()).right;
-		Object ic = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
-		System.out.println("Id componente: "+ic);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_agregar_co",21, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+		String ic = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.peek()).value;
+		
+				nuevoComponente.setIdComponente(ic);
+			
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_agregar_co",19, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -971,8 +1020,10 @@ class CUP$ParserXML$actions {
 		int pileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).left;
 		int piright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String pi = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
-		System.out.println("Id pagina: "+pi);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_agregar_co",21, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+		
+				nuevoComponente.setIdPagina(pi);
+			
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_agregar_co",19, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -982,66 +1033,68 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int tcleft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).left;
 		int tcright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
-		Object tc = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
-		System.out.println("Clase comp: "+tc);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_agregar_co",21, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+		String tc = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
+		
+				nuevoComponente.setClaseComponente(tc);
+			
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_param_agregar_co",19, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 56: // tipo_clase ::= TITULOC 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "TITULO"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",16, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",39, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 57: // tipo_clase ::= PARRAFO 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "PARRAFO"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",16, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",39, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 58: // tipo_clase ::= IMAGEN 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "IMAGEN"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",16, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",39, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 59: // tipo_clase ::= VIDEO 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "VIDEO"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",16, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",39, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 60: // tipo_clase ::= MENU 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "MENU"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",16, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("tipo_clase",39, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 61: // parametro_tipo_id ::= IDPARAM COMILLA MAYOR VALORID MENOR DIAGONAL PARAMETRO MAYOR 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		RESULT = i; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_id",34, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_id",38, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1053,7 +1106,7 @@ class CUP$ParserXML$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		RESULT = c; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_usuario_creacion",35, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_usuario_creacion",32, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1065,7 +1118,7 @@ class CUP$ParserXML$actions {
 		int fright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String f = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		RESULT = f; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_fecha_creacion",36, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_fecha_creacion",33, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1077,7 +1130,7 @@ class CUP$ParserXML$actions {
 		int mright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String m = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		RESULT = m; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_fecha_mod",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_fecha_mod",34, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1089,7 +1142,7 @@ class CUP$ParserXML$actions {
 		int uright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String u = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		RESULT = u; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_usuario_mod",38, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("parametro_tipo_usuario_mod",35, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1098,7 +1151,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiquetas",30, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-2)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiquetas",28, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-2)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1107,7 +1160,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiquetas",30, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiquetas",28, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1119,7 +1172,7 @@ class CUP$ParserXML$actions {
 		int et1right = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String et1 = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
 		System.out.println("Etiqueta: "+et1);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiqueta",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-9)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiqueta",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-9)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1131,7 +1184,7 @@ class CUP$ParserXML$actions {
 		int et2right = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-3)).right;
 		String et2 = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-3)).value;
 		System.out.println("Etiqueta: "+et2);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiqueta",31, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-8)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("etiqueta",29, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-8)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1140,7 +1193,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributos",17, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributos",16, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1149,7 +1202,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributo_lista",18, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-1)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributo_lista",17, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-1)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1158,7 +1211,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributo_lista",18, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributo_lista",17, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1168,84 +1221,86 @@ class CUP$ParserXML$actions {
               Object RESULT =null;
 		int valeft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)).left;
 		int varight = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)).right;
-		Object va = (Object)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)).value;
+		String va = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-7)).value;
 		int lileft = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).left;
 		int liright = ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).right;
 		String li = (String)((java_cup.runtime.Symbol) CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-4)).value;
-		System.out.println("Atributos: "+va+" "+li);
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributo",19, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-12)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+		
+	nuevoComponente.setAtributo(new Atributo(va, li));
+
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("atributo",18, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.elementAt(CUP$ParserXML$top-12)), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 74: // valor_atributo ::= TEXTO 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "TEXTO"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 75: // valor_atributo ::= ALINEACION 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "ALINEACION"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 76: // valor_atributo ::= COLOR 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "COLOR"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 77: // valor_atributo ::= ORIGEN 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "ORIGEN"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 78: // valor_atributo ::= ALTURA 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "ALTURA"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 79: // valor_atributo ::= ANCHO 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "ANCHO"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 80: // valor_atributo ::= PADRE 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "PADRE"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 81: // valor_atributo ::= ETIQUETAS 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		RESULT = "ETIQUETAS"; 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",20, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("valor_atributo",37, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 
@@ -1254,7 +1309,7 @@ class CUP$ParserXML$actions {
             {
               Object RESULT =null;
 
-              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("empty",39, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
+              CUP$ParserXML$result = parser.getSymbolFactory().newSymbol("empty",36, ((java_cup.runtime.Symbol)CUP$ParserXML$stack.peek()), RESULT);
             }
           return CUP$ParserXML$result;
 

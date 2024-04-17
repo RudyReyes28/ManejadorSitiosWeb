@@ -1,7 +1,22 @@
 package com.rudyreyes.manejadorweb;
+import java.util.ArrayList;
+import java.util.List;
 import java_cup.runtime.*;
-
+import com.rudyreyes.manejadorweb.modelo.componente.*;
 class ParserXML;
+
+parser code {:
+    Componente nuevoComponente = new Componente();
+    EliminarComponente elimComponente = new EliminarComponente();
+    List<Object> listaAcciones = new ArrayList<>();
+
+
+    List<Object> obtenerAcciones(){
+        return listaAcciones;
+    }
+    
+:}
+
 
 /*DEFINIENDO TERMINALES*/
 terminal MENOR, MAYOR, DIAGONAL, ACCION, NOMBRE, IGUAL, COMILLA, CREARSITIO, BORRARSITIO,NUEVAPAGINA, PARAMETROS, PARAMETRO;
@@ -17,14 +32,14 @@ non terminal accion, tipo_accion, parametros_crear_sitio, parametros_borrar_siti
 non terminal  parametro_lista_crear_sitio, parametro_borrar_sitio, parametros_nueva_pagina;
 non terminal parametro_borrar_pagina, parametros_modificar_pagina, parametro_modificar_pagina;
 non terminal parametro_lista_modificar_pagina, tipo_param_modificar_pagina, parametros_agregar_componente ;
-non terminal parametro_lista_agregar_co, parametro_agregar_co, tipo_clase, atributos, atributo_lista;
-non terminal atributo, valor_atributo, tipo_param_agregar_co, parametros_eliminar_componente;
+non terminal parametro_lista_agregar_co, parametro_agregar_co, atributos, atributo_lista;
+non terminal atributo, tipo_param_agregar_co, parametros_eliminar_componente;
 non terminal parametro_lista_eliminar_co, parametro_eliminar_co, tipo_param_eliminar_co;
 non terminal parametros_modificar_componente;
 non terminal parametro_lista_nueva_pagina, parametro_nueva_pagina, tipo_param_nueva_pagina, etiquetas, etiqueta;
-non terminal parametro_crear_sitio, tipo_param_crear_sitio, parametro_tipo_id, parametro_tipo_usuario_creacion;
+non terminal parametro_crear_sitio, tipo_param_crear_sitio, parametro_tipo_usuario_creacion;
 non terminal parametro_tipo_fecha_creacion, parametro_tipo_fecha_mod, parametro_tipo_usuario_mod, empty;
-
+non terminal String valor_atributo, parametro_tipo_id, tipo_clase;
 start with accion;
 
 accion ::= MENOR ACCION NOMBRE IGUAL  COMILLA tipo_accion 
@@ -36,9 +51,37 @@ tipo_accion ::= CREARSITIO COMILLA MAYOR parametros_crear_sitio MENOR DIAGONAL A
             | NUEVAPAGINA COMILLA MAYOR parametros_nueva_pagina etiquetas MENOR DIAGONAL ACCION MAYOR
             | BORRARPAGINA COMILLA MAYOR parametros_borrar_pagina MENOR DIAGONAL ACCION MAYOR
             | MODIFICARPAGINA COMILLA MAYOR parametros_modificar_pagina etiquetas MENOR DIAGONAL ACCION MAYOR
-            | AGREGARCOMPONENTE COMILLA MAYOR parametros_agregar_componente atributos MENOR DIAGONAL ACCION MAYOR
-            | ELIMINARCOMPONENTE COMILLA MAYOR parametros_eliminar_componente MENOR DIAGONAL ACCION MAYOR
-            | MODIFICARCOMPONENTE COMILLA MAYOR parametros_modificar_componente atributos MENOR DIAGONAL ACCION MAYOR
+            | AGREGARCOMPONENTE COMILLA MAYOR parametros_agregar_componente atributos MENOR DIAGONAL ACCION MAYOR{:
+		Componente enviarComponente = new Componente();
+		enviarComponente.setIdComponenteSinCorchetes(nuevoComponente.getIdComponente());
+		enviarComponente.setIdPaginaSinCorchetes(nuevoComponente.getIdPagina());
+		enviarComponente.setClaseComponente(nuevoComponente.getClaseComponente());
+		List<Atributo> listaAtributos =  new ArrayList<>(nuevoComponente.getListaAtributos());
+                enviarComponente.setListaAtributos(listaAtributos);
+		listaAcciones.add(enviarComponente);
+
+                nuevoComponente = new Componente();
+		:}
+            | ELIMINARCOMPONENTE COMILLA MAYOR parametros_eliminar_componente MENOR DIAGONAL ACCION MAYOR{:
+		EliminarComponente componenteElim = new EliminarComponente();
+		componenteElim.setIdComponenteSinCorchetes(elimComponente.getIdComponente());
+		componenteElim.setIdPaginaSinCorchetes(elimComponente.getIdPagina());
+		listaAcciones.add(componenteElim);
+
+                elimComponente = new EliminarComponente();
+		:}
+            | MODIFICARCOMPONENTE COMILLA MAYOR parametros_modificar_componente atributos MENOR DIAGONAL ACCION MAYOR{:
+		ModificarComponentes modComponente = new ModificarComponentes();
+			
+		modComponente.setIdComponenteSinCorchetes(nuevoComponente.getIdComponente());
+		modComponente.setIdPaginaSinCorchetes(nuevoComponente.getIdPagina());
+		modComponente.setClaseComponente(nuevoComponente.getClaseComponente());
+		List<Atributo> listaAtributos =  new ArrayList<>(nuevoComponente.getListaAtributos());
+                modComponente.setListaAtributos(listaAtributos);
+		listaAcciones.add(modComponente);
+
+                nuevoComponente = new Componente();
+		:}
 	;
 
 
@@ -121,12 +164,16 @@ parametro_lista_eliminar_co ::= parametro_eliminar_co parametro_lista_eliminar_c
 		
 parametro_eliminar_co ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_eliminar_co;
 
-tipo_param_eliminar_co ::= parametro_tipo_id:ic {:System.out.println("Id elim componente: "+ic);:}
-			| PAGINA COMILLA MAYOR  VALORID:pi  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Id pagina del comp a elim: "+pi);:}
+tipo_param_eliminar_co ::= parametro_tipo_id:ic {:
+                            elimComponente.setIdComponente(ic);
+                            :}
+			| PAGINA COMILLA MAYOR  VALORID:pi  MENOR DIAGONAL PARAMETRO MAYOR {:
+                            elimComponente.setIdPagina(pi);
+                            :}
 			;
 
 /*PARAMETROS PARA MODIFICAR COMPONENTES*/
-parametros_modificar_componente ::= MENOR PARAMETROS MAYOR parametro_lista_agregar_co PARAMETROSCIERRE {:System.out.println("Para modificar componentes");:};
+parametros_modificar_componente ::= MENOR PARAMETROS MAYOR parametro_lista_agregar_co PARAMETROSCIERRE;
 
 /*ESTO SIRVE PARA AGREGAR COMPONENTES Y MODIFICAR*/
 parametro_lista_agregar_co ::= parametro_agregar_co parametro_lista_agregar_co
@@ -135,9 +182,15 @@ parametro_lista_agregar_co ::= parametro_agregar_co parametro_lista_agregar_co
 
 parametro_agregar_co ::= MENOR PARAMETRO NOMBRE IGUAL  COMILLA tipo_param_agregar_co;
 
-tipo_param_agregar_co ::= parametro_tipo_id:ic {:System.out.println("Id componente: "+ic);:}
-			| PAGINA COMILLA MAYOR  VALORID:pi  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Id pagina: "+pi);:}
-			| CLASE COMILLA MAYOR  tipo_clase:tc  MENOR DIAGONAL PARAMETRO MAYOR {:System.out.println("Clase comp: "+tc);:}
+tipo_param_agregar_co ::= parametro_tipo_id:ic{:
+				nuevoComponente.setIdComponente(ic);
+			:}
+			| PAGINA COMILLA MAYOR  VALORID:pi  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevoComponente.setIdPagina(pi);
+			:}
+			| CLASE COMILLA MAYOR  tipo_clase:tc  MENOR DIAGONAL PARAMETRO MAYOR {:
+				nuevoComponente.setClaseComponente(tc);
+			:}
 			;
 tipo_clase ::= TITULOC {:RESULT = "TITULO"; :}
 	| PARRAFO {:RESULT = "PARRAFO"; :}
@@ -172,7 +225,9 @@ atributos ::= MENOR ATRIBUTOS MAYOR atributo_lista  ATRIBUTOSCIERRE
 atributo_lista ::= atributo atributo_lista
 		|  atributo 
 		;
-atributo ::= MENOR ATRIBUTO NOMBRE IGUAL COMILLA valor_atributo:va COMILLA MAYOR LITERAL:li MENOR DIAGONAL ATRIBUTO MAYOR {:System.out.println("Atributos: "+va+" "+li);:}
+atributo ::= MENOR ATRIBUTO NOMBRE IGUAL COMILLA valor_atributo:va COMILLA MAYOR LITERAL:li MENOR DIAGONAL ATRIBUTO MAYOR {:
+	nuevoComponente.setAtributo(new Atributo(va, li));
+:}
 			;
 valor_atributo ::= TEXTO {:RESULT = "TEXTO"; :}
 		| ALINEACION {:RESULT = "ALINEACION"; :}
