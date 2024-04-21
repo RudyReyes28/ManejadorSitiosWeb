@@ -21,41 +21,40 @@ import java.util.List;
  */
 public class AgregarYEliminarComponentes {
     
-    public static void eliminarComponente(List<PaginaWeb> paginas, EliminarComponente comp){
-        boolean componenteEncontrado = false;
-        for (PaginaWeb pagina : paginas) {
-            if (pagina.getIdPagina().equals(comp.getIdPagina())) {
-                Iterator<Componente> iter = pagina.getComponentes().iterator();
-                while (iter.hasNext()) {
-                    Componente compE = iter.next();
-                    if (compE.getIdComponente().equals(comp.getIdComponente())) {
-                        iter.remove(); // Eliminar el componente de la lista
+    public static boolean eliminarComponente(List<PaginaWeb> paginas, EliminarComponente comp){
+        
+        for(int i=0; i<paginas.size();i++){
+            if(paginas.get(i).getIdPagina().equals(comp.getIdPagina())){
+                
+                for(int j=0; j<paginas.get(i).getComponentes().size(); j++){
+                    if(paginas.get(i).getComponentes().get(j).getIdComponente().equals(comp.getIdComponente())){
+                        paginas.get(i).getComponentes().remove(j);
                         //SI LO ENCUENTRA LLAMAR LA FUNCION PARA REESCRIBIR LA PAGINA WEB
-                        componenteEncontrado = true; // Cambia el estado de la variable a verdadero
-                        break;
+                        
+                        return true;
                     }
                 }
             }
-
-            if (componenteEncontrado) {
-                break; // Salir del ciclo 'for' si el componente fue encontrado
-            }
         }
+        
+        return false;
         
     }
     
-    public static void agregarComponente(List<PaginaWeb> paginas, Componente comp){
+    public static boolean agregarComponente(List<PaginaWeb> paginas, Componente comp){
         for(int i=0; i<paginas.size();i++){
             if(paginas.get(i).getIdPagina().equals(comp.getIdPagina())){
                 paginas.get(i).setComponente(comp);
+                return true;
                 //SI LO ENCUENTRA LLAMAR LA FUNCION PARA REESCRIBIR LA PAGINA WEB
-                break;
             }
         }
+        
+        return false;
     }
     
-    public static void modificarComponente(List<PaginaWeb> paginas, ModificarComponentes comp){
-        boolean componenteEncontrado = false;
+    public static boolean modificarComponente(List<PaginaWeb> paginas, ModificarComponentes comp){
+       
         for(int i=0; i<paginas.size();i++){
             if(paginas.get(i).getIdPagina().equals(comp.getIdPagina())){
                 
@@ -64,15 +63,14 @@ public class AgregarYEliminarComponentes {
                         paginas.get(i).getComponentes().get(j).setClaseComponente(comp.getClaseComponente());
                         paginas.get(i).getComponentes().get(j).setListaAtributos(comp.getListaAtributos());
                         //SI LO ENCUENTRA LLAMAR LA FUNCION PARA REESCRIBIR LA PAGINA WEB
-                        componenteEncontrado = true;
-                        break;
+                        
+                        return true;
                     }
                 }
             }
-            if (componenteEncontrado) {
-                break; // Salir del ciclo 'for' si el componente fue encontrado
-            }
         }
+        
+        return false;
     }
     
     public static void borrarPaginaWeb(List<PaginaWeb> paginas, BorrarPaginaWeb comp){
@@ -102,14 +100,16 @@ public class AgregarYEliminarComponentes {
         }
     }
     
-    public static void borrarSitioWeb(List<SitioWeb> sitios, BorrarSitioWeb borrar){
+    public static boolean borrarSitioWeb(List<SitioWeb> sitios, BorrarSitioWeb borrar){
        for(int i =0; i<sitios.size(); i++){
            if(sitios.get(i).getIdSitio().equals(borrar.getIdSitio())){
                sitios.remove(i);
-               break;
+               return true;
                //actualizar sitios
            }
        } 
+       
+       return false;
     }
     
 }

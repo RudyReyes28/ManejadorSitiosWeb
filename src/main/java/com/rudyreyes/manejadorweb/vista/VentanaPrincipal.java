@@ -187,105 +187,170 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void generarPaginasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarPaginasActionPerformed
         String entradaXML = areaXML.getText();
-        
-        if(entradaXML!=null){
+        areaErrores.setText("");
+        if (entradaXML != null) {
             LexerXML lexer = new LexerXML(new StringReader(entradaXML));
             ParserXML parser = new ParserXML(lexer);
-            
-            
+
             try {
-            parser.parse();
-            List<Object> acciones = new ArrayList<>(parser.obtenerAcciones());
-            
-            for(Object objetos: acciones){
-                
-                if(objetos instanceof Componente){
-                    Componente nuevoComponente = (Componente)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirComponentes();
-                        //LISTO
-                    }
-                
-                }else if(objetos instanceof ModificarComponentes){
-                    ModificarComponentes nuevoComponente = (ModificarComponentes)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirComponentes();
-                        //LISTO
-                    }
-                
-                }else if(objetos instanceof EliminarComponente){
-                    EliminarComponente nuevoComponente = (EliminarComponente)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirComponentes();
-                        //HACER VERIFICACIONES
-                        //YA ESTA MANEJADO
+                parser.parse();
+                List<Object> acciones = new ArrayList<>(parser.obtenerAcciones());
+
+                for (Object objetos : acciones) {
+
+                    //AGREGAR COMPONENTES
+                    if (objetos instanceof Componente) {
+                        Componente nuevoComponente = (Componente) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirComponentes();
+                            if (VerificacionesHtml.verficarAgregarComponente(nuevoComponente)) {
+                                boolean encontrado = AgregarYEliminarComponentes.agregarComponente(paginas, nuevoComponente);
+                                if (encontrado) {
+                                    EscribirPaginasWeb.generarUnaPaginaWebID(paginas, nuevoComponente.getIdPagina());
+                                    ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+                                } else {
+                                    areaErrores.append("La pagina para agregar el componente no existe\n");
+                                }
+                            } else {
+                                areaErrores.append("Inserte el ID, Pagina o Clase del componente a agregar\n");
+                            }
+                        }
+
                     }
                     
-                }else if(objetos instanceof PaginaWeb){
-                    PaginaWeb nuevoComponente = (PaginaWeb)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirPagina();
-                        if(VerificacionesHtml.verificarPaginaWeb(nuevoComponente)){
-                            paginas.add(nuevoComponente);
-                            String contenido = EscribirPaginasWeb.generarContenidoHTMLPagina(nuevoComponente, paginas);
-                            GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdPagina());
-                        }else{
-                            areaErrores.setText("Inserte el ID o el Sitio de la pagina web que desea crear");
+                    //MODIFICAR COMPONENTES
+                    else if (objetos instanceof ModificarComponentes) {
+                        ModificarComponentes nuevoComponente = (ModificarComponentes) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirComponentes();
+                            //LISTO
+                            if(VerificacionesHtml.verificarModificarComponente(nuevoComponente)){
+                                boolean encontrado =AgregarYEliminarComponentes.modificarComponente(paginas, nuevoComponente);
+                                if (encontrado) {
+                                    EscribirPaginasWeb.generarUnaPaginaWebID(paginas, nuevoComponente.getIdPagina());
+                                    ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+                                } else {
+                                    areaErrores.append("La pagina para agregar el componente no existe\n");
+                                }
+                            } else {
+                                areaErrores.append("Inserte el ID, Pagina o Clase del componente a agregar\n");
+                            }
+                        }
+
+                    } 
+                    
+                    //ELIMINAR COMPONENTES
+                    else if (objetos instanceof EliminarComponente) {
+                        EliminarComponente nuevoComponente = (EliminarComponente) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirComponentes();
+                            //HACER VERIFICACIONES
+                            //YA ESTA MANEJADO
+                            if(VerificacionesHtml.verificarEliminarComponente(nuevoComponente)){
+                                boolean encontrado =AgregarYEliminarComponentes.eliminarComponente(paginas, nuevoComponente);
+                                if (encontrado) {
+                                    EscribirPaginasWeb.generarUnaPaginaWebID(paginas, nuevoComponente.getIdPagina());
+                                    ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+                                } else {
+                                    areaErrores.append("La pagina para eliminar el componente no existe\n");
+                                }
+                            } else {
+                                areaErrores.append("Inserte el ID, Pagina del componente a eliminar\n");
+                            }
+                        }
+
+                    }
+                    
+                    //NUEVA PAGINA WEB
+                    else if (objetos instanceof PaginaWeb) {
+                        PaginaWeb nuevoComponente = (PaginaWeb) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirPagina();
+                            if (VerificacionesHtml.verificarPaginaWeb(nuevoComponente)) {
+                                paginas.add(nuevoComponente);
+                                String contenido = EscribirPaginasWeb.generarContenidoHTMLPagina(nuevoComponente, paginas);
+                                GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdPagina());
+                            } else {
+                                areaErrores.append("Inserte el ID o el Sitio de la pagina web que desea crear\n");
+                            }
+
+                            ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+                        }
+
+                    }
+                    
+                    //BORRAR PAGINA WEB
+                    else if (objetos instanceof BorrarPaginaWeb) {
+                        BorrarPaginaWeb nuevoComponente = (BorrarPaginaWeb) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirBorrarPagina();
+                            if (VerificacionesHtml.borrarPaginaWeb(nuevoComponente)) {
+                                AgregarYEliminarComponentes.borrarPaginaWeb(paginas, nuevoComponente);
+                                //DEBERIA REMOVER TAMBIEN EL ARCHIVO HTML
+                            } else {
+                                areaErrores.setText("Inserte el ID de la pagina web que desea borrar\n");
+                            }
+                            ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+                        }
+                    }
+                    
+                    //MODIFICAR PAGINA WEB
+                    else if (objetos instanceof ModificarPagina) {
+                        ModificarPagina nuevoComponente = (ModificarPagina) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirPagina();
+                            if (VerificacionesHtml.modificarPaginaWeb(nuevoComponente)) {
+                                AgregarYEliminarComponentes.modificarPaginaWeb(paginas, nuevoComponente);
+                                EscribirPaginasWeb.generarUnaPaginaWebID(paginas, nuevoComponente.getIdPagina());
+                            }
+                        }
+
+                        ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+
+                    }
+                    
+                    //SITIO WEB
+                    else if (objetos instanceof SitioWeb) {
+                        SitioWeb nuevoComponente = (SitioWeb) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirSitio();
+                            if (VerificacionesHtml.verificarSitiosWeb(nuevoComponente)) {
+                                sitios.add(nuevoComponente);
+                                String contenido = EscribirSitiosWeb.generarContenidoHTMLSitio(nuevoComponente.getIdSitio(), "Sitio Web " + nuevoComponente.getIdSitio());
+                                GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdSitio());
+                            } else {
+                                areaErrores.append("Inserte el ID del sitio web que desea crear\n");
+                            }
+                        }
+                        ImprimirDatosConsola.imprimirSitiosWeb(sitios);
+
+                    }
+                    
+                    //BORRAR SITIO WEB
+                    else if (objetos instanceof BorrarSitioWeb) {
+                        BorrarSitioWeb nuevoComponente = (BorrarSitioWeb) objetos;
+                        if (nuevoComponente != null) {
+                            nuevoComponente.imprimirBorrarSitio();
+                            if (VerificacionesHtml.verificarBorrarSitio(nuevoComponente)) {
+                                AgregarYEliminarComponentes.borrarSitioWeb(sitios, nuevoComponente);
+                                //DEBERIA REMOVER TAMBIEN EL ARCHIVO HTML
+                            } else {
+                                areaErrores.append("Inserte el ID del sitio web que desea borrar\n");
+                            }
                         }
                         
-                        ImprimirDatosConsola.imprimirPaginasWeb(paginas);
+                        ImprimirDatosConsola.imprimirSitiosWeb(sitios);
+
                     }
-                    
-                }else if(objetos instanceof BorrarPaginaWeb){
-                    BorrarPaginaWeb nuevoComponente = (BorrarPaginaWeb)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirBorrarPagina();
-                        if(VerificacionesHtml.borrarPaginaWeb(nuevoComponente)){
-                            AgregarYEliminarComponentes.borrarPaginaWeb(paginas, nuevoComponente);
-                        }
-                        ImprimirDatosConsola.imprimirPaginasWeb(paginas);
-                    }
-                }else if(objetos instanceof ModificarPagina){
-                    ModificarPagina nuevoComponente = (ModificarPagina)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirPagina();
-                        if(VerificacionesHtml.modificarPaginaWeb(nuevoComponente)){
-                            AgregarYEliminarComponentes.modificarPaginaWeb(paginas, nuevoComponente);                            
-                            EscribirPaginasWeb.generarUnaPaginaWebID(paginas,nuevoComponente.getIdPagina());
-                        }
-                    }
-                    
-                    ImprimirDatosConsola.imprimirPaginasWeb(paginas);
-                    
-                }else if(objetos instanceof SitioWeb){
-                    SitioWeb nuevoComponente = (SitioWeb)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirSitio();
-                        if(VerificacionesHtml.verificarSitiosWeb(nuevoComponente)){
-                            sitios.add(nuevoComponente);
-                            String contenido = EscribirSitiosWeb.generarContenidoHTMLSitio(nuevoComponente.getIdSitio(), "Sitio Web "+nuevoComponente.getIdSitio());
-                            GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdSitio());
-                        }else{
-                            areaErrores.setText("Inserte el ID del sitio web que desea crear");
-                        }
-                    }
-                    
-                }else if(objetos instanceof BorrarSitioWeb){
-                    BorrarSitioWeb nuevoComponente = (BorrarSitioWeb)objetos;
-                    if(nuevoComponente!=null){
-                        nuevoComponente.imprimirBorrarSitio();
-                        //listo
-                    }
-                    
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(ManejadorWeb.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(ManejadorWeb.class.getName()).log(Level.SEVERE, null, ex);
+            
+            parser.limpiarAcciones();
         }
-        }
-        
-        
-        
+
+
     }//GEN-LAST:event_generarPaginasActionPerformed
 
     /**

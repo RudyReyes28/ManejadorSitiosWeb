@@ -51,7 +51,7 @@ public class EscribirPaginasWeb {
         
         //AGREGAR COMPONENTES
         for(Componente comp: pagina.getComponentes()){
-             estructura += estructura+=agregarComponenteHTML(comp);
+             estructura+=agregarComponenteHTML(comp);
         }
         //AGREGAR HIJOS
         

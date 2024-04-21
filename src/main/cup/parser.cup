@@ -18,6 +18,10 @@ parser code {:
     public List<Object> obtenerAcciones(){
         return listaAcciones;
     }
+
+    public void limpiarAcciones(){
+        listaAcciones.clear();
+    }
     
 :}
 

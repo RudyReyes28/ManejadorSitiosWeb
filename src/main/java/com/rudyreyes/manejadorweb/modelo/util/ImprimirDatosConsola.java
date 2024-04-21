@@ -5,6 +5,7 @@
 package com.rudyreyes.manejadorweb.modelo.util;
 
 import com.rudyreyes.manejadorweb.modelo.paginaweb.PaginaWeb;
+import com.rudyreyes.manejadorweb.modelo.sitioweb.SitioWeb;
 import java.util.List;
 
 /**
@@ -24,6 +25,18 @@ public class ImprimirDatosConsola {
             System.out.println("No hay paginas");
         }
         
+    }
+    
+    public static void imprimirSitiosWeb(List<SitioWeb> sitios){
+        System.out.println("\n\nSITIOS ENCONTRADAS");
+        if (!sitios.isEmpty()) {
+            for (SitioWeb sitio : sitios) {
+                sitio.imprimirSitio();
+                System.out.println("\n");
+            }
+        }else{
+            System.out.println("No hay sitios");
+        }
     }
     
 }
