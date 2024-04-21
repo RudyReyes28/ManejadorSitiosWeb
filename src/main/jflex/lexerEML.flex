@@ -46,6 +46,8 @@ newline = [\n]
 {whitespace} {/* ignore */}
 {newline} {/* ignore */}
 
+"<"{whitespace}*"acciones"{whitespace}*">" {return new Symbol(ParserXMLSym.ARBREACCIONES);}
+"<"{whitespace}*"/"{whitespace}*"acciones"{whitespace}*">" {return new Symbol(ParserXMLSym.CIERREACCION);}
 "<"{whitespace}*"/"{whitespace}*"parametros"{whitespace}*">" {return new Symbol(ParserXMLSym.PARAMETROSCIERRE);}
 "<"{whitespace}*"/"{whitespace}*"etiquetas"{whitespace}*">"    {return new Symbol(ParserXMLSym.ETIQUETASCIERRE);}
 "<"{whitespace}*"/"{whitespace}*"atributos"{whitespace}*">"    {return new Symbol(ParserXMLSym.ATRIBUTOSCIERRE);}

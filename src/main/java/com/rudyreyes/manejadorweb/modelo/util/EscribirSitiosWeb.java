@@ -4,6 +4,7 @@
  */
 package com.rudyreyes.manejadorweb.modelo.util;
 
+import com.rudyreyes.manejadorweb.modelo.paginaweb.BorrarPaginaWeb;
 import com.rudyreyes.manejadorweb.modelo.paginaweb.PaginaWeb;
 import com.rudyreyes.manejadorweb.modelo.sitioweb.SitioWeb;
 import java.util.List;
@@ -35,7 +36,7 @@ public class EscribirSitiosWeb {
                     + "<title>" + sitio.getIdSitio() + "</title>\n"
                     + "</head>\n"
                     + "<body>\n"
-                    + "<h1> Sitio WEB" + sitio.getIdSitio() + "</h1>\n";
+                    + "<h1> Sitio WEB" + sitio.getIdSitio() + "</h1>\n\n";
             String estructura = "";
             for (PaginaWeb pagina : paginas) {
                 if (pagina.getSitio() != null) {
@@ -43,7 +44,7 @@ public class EscribirSitiosWeb {
 
                         if (pagina.getIdPadre() == null || sitio.getIdSitio().equals(pagina.getIdPadre())) {
 
-                            estructura += "\n<a href=\"http://localhost:8080/" + pagina.getIdPagina() + ">Ir a la pagina " + pagina.getTitulo() + "</a>";
+                            estructura += "<a href=\"http://localhost:8080/" + pagina.getIdPagina()+".html\"" + ">Ir a la pagina " + pagina.getTitulo() + "</a><br>";
 
                         }
 
@@ -60,6 +61,33 @@ public class EscribirSitiosWeb {
         }
         
         
+    }
+    
+    
+    public static void agregarPaginaASitio(List<SitioWeb> sitios, PaginaWeb pagina){
+        if (!sitios.isEmpty()) {
+            for (int i = 0; i < sitios.size(); i++) {
+                if(sitios.get(i).getIdSitio().equals(pagina.getSitio())){
+                    sitios.get(i).setPaginaWeb(pagina.getIdPagina());
+                }
+            }
+        }
+        
+    }
+    
+    
+    public static boolean eliminarPaginaDeSitio(List<SitioWeb> sitios, BorrarPaginaWeb pagina){
+        for(int i=0; i<sitios.size();i++){
+           
+                for(int j=0; j<sitios.get(i).getPaginasWeb().size(); j++){
+                    if(sitios.get(i).getPaginasWeb().get(j).equals(pagina.getIdPagina())){
+                        sitios.get(i).getPaginasWeb().remove(j);
+                        return true;
+                    }
+                }
+        }
+        
+        return false;
     }
     
 }

@@ -29,6 +29,23 @@ public class GenerarArchivos {
         }
     }
     
+    public static void eliminarArchivo(String nombreArchivo) {
+        String rutaCompleta = "paginasHTML" + File.separator + nombreArchivo+".html";
+        File archivo = new File(rutaCompleta);
+        
+        // Verificar si el archivo existe
+        if (archivo.exists()) {
+            // Intentar eliminar el archivo
+            if (archivo.delete()) {
+                System.out.println("El archivo " + nombreArchivo + " ha sido eliminado exitosamente.");
+            } else {
+                System.err.println("No se pudo eliminar el archivo " + nombreArchivo + ".");
+            }
+        } else {
+            System.err.println("El archivo " + nombreArchivo + " no existe.");
+        }
+    }
+    
     public static void generarCarpeta(){
         File carpeta = new File("paginasHTML");
         if (!carpeta.exists()) {

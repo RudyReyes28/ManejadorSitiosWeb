@@ -73,15 +73,16 @@ public class AgregarYEliminarComponentes {
         return false;
     }
     
-    public static void borrarPaginaWeb(List<PaginaWeb> paginas, BorrarPaginaWeb comp){
+    public static boolean borrarPaginaWeb(List<PaginaWeb> paginas, BorrarPaginaWeb comp){
         for(int i=0; i<paginas.size();i++){
             if(paginas.get(i).getIdPagina().equals(comp.getIdPagina())){
                 paginas.remove(i);
-                //ELIMINAMOS LA PAGINA
+                return true;
                 //VOLVEMOS A REESTRUCTURAR
-                break;
             }
         }
+        
+        return false;
     }
     
     public static void modificarPaginaWeb(List<PaginaWeb> paginas, ModificarPagina comp){

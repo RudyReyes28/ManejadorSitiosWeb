@@ -271,8 +271,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 paginas.add(nuevoComponente);
                                 String contenido = EscribirPaginasWeb.generarContenidoHTMLPagina(nuevoComponente, paginas);
                                 GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdPagina());
-                                //EscribirPaginasWeb.generarTodasLasPaginasHTML(paginas);
-                                //EscribirSitiosWeb.verificarPaginasHijas(sitios, paginas);
+                                EscribirSitiosWeb.agregarPaginaASitio(sitios, nuevoComponente);
+                                EscribirPaginasWeb.generarTodasLasPaginasHTML(paginas);
+                                EscribirSitiosWeb.verificarPaginasHijas(sitios, paginas);
                             } else {
                                 areaErrores.append("Inserte el ID o el Sitio de la pagina web que desea crear\n");
                             }
@@ -288,8 +289,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         if (nuevoComponente != null) {
                             nuevoComponente.imprimirBorrarPagina();
                             if (VerificacionesHtml.borrarPaginaWeb(nuevoComponente)) {
-                                AgregarYEliminarComponentes.borrarPaginaWeb(paginas, nuevoComponente);
-                                //DEBERIA REMOVER TAMBIEN EL ARCHIVO HTML
+                                boolean encontrado = AgregarYEliminarComponentes.borrarPaginaWeb(paginas, nuevoComponente);
+                                if(encontrado){
+                                    GenerarArchivos.eliminarArchivo(nuevoComponente.getIdPagina());
+                                    EscribirSitiosWeb.eliminarPaginaDeSitio(sitios, nuevoComponente);
+                                    EscribirPaginasWeb.generarTodasLasPaginasHTML(paginas);
+                                    EscribirSitiosWeb.verificarPaginasHijas(sitios, paginas);
+                                }else{
+                                    areaErrores.setText("Pagina no encontrada\n");
+                                }
                             } else {
                                 areaErrores.setText("Inserte el ID de la pagina web que desea borrar\n");
                             }
@@ -335,8 +343,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         if (nuevoComponente != null) {
                             nuevoComponente.imprimirBorrarSitio();
                             if (VerificacionesHtml.verificarBorrarSitio(nuevoComponente)) {
-                                AgregarYEliminarComponentes.borrarSitioWeb(sitios, nuevoComponente);
+                                boolean encontrado = AgregarYEliminarComponentes.borrarSitioWeb(sitios, nuevoComponente);
                                 //DEBERIA REMOVER TAMBIEN EL ARCHIVO HTML
+                                
+                                if(encontrado){
+                                    GenerarArchivos.eliminarArchivo(nuevoComponente.getIdSitio());
+                                    
+                                }else{
+                                    areaErrores.setText("Sitio no encontrada\n");
+                                }
                             } else {
                                 areaErrores.append("Inserte el ID del sitio web que desea borrar\n");
                             }

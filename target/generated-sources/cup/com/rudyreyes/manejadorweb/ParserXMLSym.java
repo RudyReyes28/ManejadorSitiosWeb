@@ -10,7 +10,7 @@ public interface ParserXMLSym {
   /* terminals */
   public static final int MODIFICARCOMPONENTE = 48;
   public static final int DIAGONAL = 4;
-  public static final int DATOETIQUETA = 52;
+  public static final int DATOETIQUETA = 54;
   public static final int ALINEACION = 46;
   public static final int NUEVAPAGINA = 11;
   public static final int PAGINA = 22;
@@ -19,17 +19,18 @@ public interface ParserXMLSym {
   public static final int ANCHO = 31;
   public static final int VIDEO = 43;
   public static final int ETIQUETAS = 33;
-  public static final int VALORFECHA = 51;
+  public static final int VALORFECHA = 53;
   public static final int MENU = 44;
   public static final int PARAMETROSCIERRE = 20;
   public static final int IGUAL = 7;
   public static final int MODIFICARPAGINA = 21;
-  public static final int VALORID = 50;
+  public static final int VALORID = 52;
   public static final int BORRARPAGINA = 14;
   public static final int TITULO = 34;
   public static final int ATRIBUTOSCIERRE = 26;
   public static final int PADRE = 32;
   public static final int USUARIOCREACION = 16;
+  public static final int CIERREACCION = 50;
   public static final int TITULOC = 40;
   public static final int EOF = 0;
   public static final int ELIMINARCOMPONENTE = 47;
@@ -46,13 +47,14 @@ public interface ParserXMLSym {
   public static final int COLOR = 28;
   public static final int MAYOR = 3;
   public static final int CONTENIDOETIQUETA = 37;
-  public static final int LITERAL = 49;
+  public static final int LITERAL = 51;
   public static final int IMAGEN = 42;
   public static final int PARRAFO = 41;
   public static final int USUARIOMODIFICACION = 18;
   public static final int ORIGEN = 29;
   public static final int ETIQUETASCIERRE = 39;
   public static final int VALORETIQUETA = 38;
+  public static final int ARBREACCIONES = 49;
   public static final int PARAMETRO = 13;
   public static final int FECHACREACION = 19;
   public static final int SITIO = 35;
@@ -111,6 +113,8 @@ public interface ParserXMLSym {
   "ALINEACION",
   "ELIMINARCOMPONENTE",
   "MODIFICARCOMPONENTE",
+  "ARBREACCIONES",
+  "CIERREACCION",
   "LITERAL",
   "VALORID",
   "VALORFECHA",

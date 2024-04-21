@@ -20,7 +20,7 @@ public class SitioWeb {
     private String fechaCreacion;
     private String fechaModificacion;
     private String usuarioModificacion;
-    List<PaginaWeb> paginasWeb;
+    List<String> paginasWeb;
 
     public SitioWeb() {
         this.paginasWeb = new ArrayList<>();
@@ -38,15 +38,15 @@ public class SitioWeb {
         this.idSitio = idSitio;
     }
 
-    public List<PaginaWeb> getPaginasWeb() {
+    public List<String> getPaginasWeb() {
         return paginasWeb;
     }
 
-    public void setPaginasWeb(List<PaginaWeb> paginasWeb) {
+    public void setPaginasWeb(List<String> paginasWeb) {
         this.paginasWeb = paginasWeb;
     }
     
-    public void setPaginaWeb(PaginaWeb paginaWeb){
+    public void setPaginaWeb(String paginaWeb){
         this.paginasWeb.add(paginaWeb);
     }
     
@@ -107,8 +107,8 @@ public class SitioWeb {
         System.out.println("fechaModificacion: "+fechaModificacion);
         System.out.println("usuarioModificacion: "+usuarioModificacion);
         
-        for(PaginaWeb pag: paginasWeb){
-            pag.imprimirPagina();
+        for(String pag: paginasWeb){
+            System.out.println("Pagina "+pag);
         }
         
     }

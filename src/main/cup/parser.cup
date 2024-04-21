@@ -32,6 +32,7 @@ terminal BORRARPAGINA, IDPARAM, USUARIOCREACION, FECHAMODIFICACION, USUARIOMODIF
 terminal MODIFICARPAGINA, PAGINA, CLASE, ATRIBUTOS, ATRIBUTO,ATRIBUTOSCIERRE, TEXTO, COLOR,ORIGEN,  ALTURA, ANCHO, PADRE;
 terminal ETIQUETAS, TITULO, SITIO, ETIQUETA, CONTENIDOETIQUETA, VALORETIQUETA, ETIQUETASCIERRE, TITULOC;
 terminal PARRAFO, IMAGEN, VIDEO, MENU, AGREGARCOMPONENTE, ALINEACION, ELIMINARCOMPONENTE, MODIFICARCOMPONENTE;
+terminal ARBREACCIONES, CIERREACCION;
 terminal String LITERAL, VALORID, VALORFECHA, DATOETIQUETA;
 
 
@@ -43,12 +44,16 @@ non terminal parametro_lista_modificar_pagina, tipo_param_modificar_pagina, para
 non terminal parametro_lista_agregar_co, parametro_agregar_co, atributos, atributo_lista;
 non terminal atributo, tipo_param_agregar_co, parametros_eliminar_componente;
 non terminal parametro_lista_eliminar_co, parametro_eliminar_co, tipo_param_eliminar_co;
-non terminal parametros_modificar_componente;
+non terminal parametros_modificar_componente, acciones;
 non terminal parametro_lista_nueva_pagina, parametro_nueva_pagina, tipo_param_nueva_pagina, etiquetas, etiqueta;
 non terminal parametro_crear_sitio, tipo_param_crear_sitio, empty;
 non terminal String valor_atributo, parametro_tipo_id, tipo_clase, parametro_tipo_usuario_creacion;
 non terminal String parametro_tipo_fecha_creacion, parametro_tipo_fecha_mod, parametro_tipo_usuario_mod;
-start with accion;
+start with acciones;
+
+acciones ::= ARBREACCIONES accion CIERREACCION
+			| accion
+			;
 
 accion ::= MENOR ACCION NOMBRE IGUAL  COMILLA tipo_accion 
 	|accion MENOR ACCION NOMBRE IGUAL  COMILLA tipo_accion
