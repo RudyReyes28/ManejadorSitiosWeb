@@ -28,4 +28,11 @@ public class GenerarArchivos {
             System.err.println("Error al generar el archivo HTML: " + e.getMessage());
         }
     }
+    
+    public static void generarCarpeta(){
+        File carpeta = new File("paginasHTML");
+        if (!carpeta.exists()) {
+            carpeta.mkdirs(); // Crea los directorios necesarios si no existen
+        }
+    }
 }

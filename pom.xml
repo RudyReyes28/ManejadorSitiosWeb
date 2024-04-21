@@ -18,6 +18,13 @@
             <artifactId>java-cup-runtime</artifactId>
             <version>11b-20160615-3</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.2.14.v20151106</version>
+        </dependency>
     </dependencies>
     
     <build>

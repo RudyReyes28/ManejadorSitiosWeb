@@ -39,6 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        GenerarArchivos.generarCarpeta();
     }
 
     /**
@@ -270,6 +271,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 paginas.add(nuevoComponente);
                                 String contenido = EscribirPaginasWeb.generarContenidoHTMLPagina(nuevoComponente, paginas);
                                 GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdPagina());
+                                //EscribirPaginasWeb.generarTodasLasPaginasHTML(paginas);
+                                //EscribirSitiosWeb.verificarPaginasHijas(sitios, paginas);
                             } else {
                                 areaErrores.append("Inserte el ID o el Sitio de la pagina web que desea crear\n");
                             }

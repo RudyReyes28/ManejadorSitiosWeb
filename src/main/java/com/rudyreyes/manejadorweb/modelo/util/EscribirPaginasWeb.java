@@ -54,6 +54,14 @@ public class EscribirPaginasWeb {
              estructura+=agregarComponenteHTML(comp);
         }
         //AGREGAR HIJOS
+        for(PaginaWeb pag: paginas){
+            if(pag.getIdPadre()!= null){
+                if(pagina.getIdPagina().equals(pag.getIdPadre())){
+                    estructura+= "\n<a href=\"http://localhost:8080/"+pag.getIdPagina()+">Ir a la pagina " + pag.getTitulo()+"</a>";
+                }
+            }
+            
+        }
         
         //AGREGAR ETIQUETAS
         String eti = "";
