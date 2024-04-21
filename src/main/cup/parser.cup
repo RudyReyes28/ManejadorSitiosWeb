@@ -15,7 +15,7 @@ parser code {:
     List<Object> listaAcciones = new ArrayList<>();
 
 
-    List<Object> obtenerAcciones(){
+    public List<Object> obtenerAcciones(){
         return listaAcciones;
     }
     

@@ -91,7 +91,7 @@ public class AgregarYEliminarComponentes {
             if(paginas.get(i).getIdPagina().equals(comp.getIdPagina())){
                
                 String titulo = comp.getTitulo();
-                paginas.get(i).setTitulo(titulo);
+                paginas.get(i).setTituloSinCorchetes(titulo);
                 if(!comp.getEtiquetas().isEmpty()){
                     paginas.get(i).setEtiquetas(comp.getEtiquetas());
                 }

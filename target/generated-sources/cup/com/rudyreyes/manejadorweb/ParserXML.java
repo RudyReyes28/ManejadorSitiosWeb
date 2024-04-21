@@ -422,7 +422,7 @@ public class ParserXML extends java_cup.runtime.lr_parser {
     List<Object> listaAcciones = new ArrayList<>();
 
 
-    List<Object> obtenerAcciones(){
+    public List<Object> obtenerAcciones(){
         return listaAcciones;
     }
     

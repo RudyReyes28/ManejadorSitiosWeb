@@ -14,6 +14,33 @@ import java.util.List;
  * @author rudyo
  */
 public class EscribirPaginasWeb {
+    
+    public static void generarTodasLasPaginasHTML(List<PaginaWeb> paginas){
+        
+        if(!paginas.isEmpty()){
+            for(PaginaWeb pagina: paginas){
+                String contenido = generarContenidoHTMLPagina(pagina, paginas);
+                GenerarArchivos.escribirArchivo(contenido, pagina.getIdPagina());
+
+            }
+        
+        }
+    }
+    
+    public static void generarUnaPaginaWebID(List<PaginaWeb> paginas, String idPagina){
+        if(!paginas.isEmpty()){
+            for(PaginaWeb pagina: paginas){
+                if(pagina.getIdPagina().equals(idPagina)){
+                    String contenido = generarContenidoHTMLPagina(pagina, paginas);
+                    GenerarArchivos.escribirArchivo(contenido, pagina.getIdPagina());
+                    break;
+                }
+
+            }
+        
+        }
+    }
+    
     public static String generarContenidoHTMLPagina(PaginaWeb pagina, List<PaginaWeb> paginas) {
         String estructura =  "<!DOCTYPE html>\n" +
                 "<html>\n" +
