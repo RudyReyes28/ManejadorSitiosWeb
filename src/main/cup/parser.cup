@@ -47,7 +47,7 @@ non terminal parametro_lista_eliminar_co, parametro_eliminar_co, tipo_param_elim
 non terminal parametros_modificar_componente, acciones;
 non terminal parametro_lista_nueva_pagina, parametro_nueva_pagina, tipo_param_nueva_pagina, etiquetas, etiqueta;
 non terminal parametro_crear_sitio, tipo_param_crear_sitio, empty;
-non terminal String valor_atributo, parametro_tipo_id, tipo_clase, parametro_tipo_usuario_creacion;
+non terminal String valor_atributo, parametro_tipo_id, tipo_clase, parametro_tipo_usuario_creacion, literal_id;
 non terminal String parametro_tipo_fecha_creacion, parametro_tipo_fecha_mod, parametro_tipo_usuario_mod;
 start with acciones;
 
@@ -354,10 +354,14 @@ atributos ::= MENOR ATRIBUTOS MAYOR atributo_lista  ATRIBUTOSCIERRE
 atributo_lista ::= atributo atributo_lista
 		|  atributo 
 		;
-atributo ::= MENOR ATRIBUTO NOMBRE IGUAL COMILLA valor_atributo:va COMILLA MAYOR LITERAL:li MENOR DIAGONAL ATRIBUTO MAYOR {:
+atributo ::= MENOR ATRIBUTO NOMBRE IGUAL COMILLA valor_atributo:va COMILLA MAYOR literal_id:li MENOR DIAGONAL ATRIBUTO MAYOR {:
 	nuevoComponente.setAtributo(new Atributo(va, li));
 :}
-			;
+;
+
+literal_id ::= LITERAL:li {:RESULT = li;:}
+            |VALORID:id {:RESULT = id;:}
+            ;
 valor_atributo ::= TEXTO {:RESULT = "TEXTO"; :}
 		| ALINEACION {:RESULT = "ALINEACION"; :}
 		| COLOR {:RESULT = "COLOR"; :}

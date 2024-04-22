@@ -7,6 +7,7 @@ package com.rudyreyes.manejadorweb.modelo.util;
 import com.rudyreyes.manejadorweb.modelo.componente.Atributo;
 import com.rudyreyes.manejadorweb.modelo.componente.Componente;
 import com.rudyreyes.manejadorweb.modelo.paginaweb.PaginaWeb;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class EscribirPaginasWeb {
         
         //AGREGAR COMPONENTES
         for(Componente comp: pagina.getComponentes()){
-             estructura+=agregarComponenteHTML(comp);
+             estructura+=agregarComponenteHTML(comp,paginas );
         }
         //AGREGAR HIJOS
         estructura+="\n";
@@ -79,7 +80,7 @@ public class EscribirPaginasWeb {
         return estructura;
     }
     
-    public static String agregarComponenteHTML(Componente componente){
+    public static String agregarComponenteHTML(Componente componente, List<PaginaWeb> paginas){
         String etiqueta = "";
         //------TITULO---------
         if(componente.getClaseComponente().equalsIgnoreCase("TITULO")){
@@ -221,14 +222,53 @@ public class EscribirPaginasWeb {
             
             return etiquetaVideo;
         }else if(componente.getClaseComponente().equalsIgnoreCase("MENU")){
-            return etiqueta;
+            String etiquetaMenu="";
+            etiquetaMenu +="<h1 style=\"text-transform: uppercase; color: #0000FF;\">MENU</h1>";
+            String padre = "";
+            String etiquetas ="";
+            for(Atributo atrib: componente.getListaAtributos()){
+                if(atrib.getAtributo().equals("PADRE")){
+                    padre = atrib.getValor();
+                }else if(atrib.getAtributo().equals("ETIQUETAS")){
+                    etiquetas = atrib.getValor();
+                }
+            }
+            String[] palabras = etiquetas.split("\\|");
+
+            // Eliminar el último elemento si es una cadena vacía
+            if (palabras.length > 0 && palabras[palabras.length - 1].isEmpty()) {
+                palabras = Arrays.copyOf(palabras, palabras.length - 1);
+            }
+            
+          
+            for(PaginaWeb pag : paginas) {
+                if (pag.getIdPadre() != null) {
+                    if (pag.getIdPadre().equals(padre)) {
+                        if (palabraEnArreglo(palabras, pag.getEtiquetas())) {
+                            etiquetaMenu += "<a href=\"http://localhost:8080/" + pag.getIdPagina() + ".html\"" + ">Ir a la pagina " + pag.getTitulo() + "</a><br>";
+                        }
+                    }
+                }
+                
+            }
+            return etiquetaMenu;
         }
         
         
         
         return etiqueta;
     }
-    
+    public static boolean palabraEnArreglo(String[] arreglo, List<String> palabras) {
+        for (String elemento : arreglo) {
+            for (String palabra : palabras) {
+                if (elemento.equals(palabra)) {
+                    return true; // La palabra está en el arreglo
+                }
+            }
+
+        }
+        return false; // La palabra no está en el arreglo
+    }
     public static String alineacionEtiqueta(String alineacion){
         if(alineacion.equalsIgnoreCase("CENTRAR")){
             return "center";
