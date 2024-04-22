@@ -1,0 +1,75 @@
+package com.rudyreyes.manejadorweb;
+import com.rudyreyes.manejadorweb.modelo.consultas.*;
+import java.util.ArrayList;
+import java.util.List;
+import java_cup.runtime.*;
+
+class ParserSQ;
+
+parser code {:
+
+    List<String> idPaginas = new ArrayList<>();
+    List<Object> consultas = new ArrayList<>();
+    
+    
+
+    public List<Object> obtenerConsultas(){
+        return consultas;
+    }
+
+:}
+
+terminal CONSULTAR, VISITASITIO, VISITAPAGINA, COMA, P_COMA, PAG_POPULAR, COMILLA;
+terminal COMPONENTE, TITULO, PARRAFO, IMAGEN, VIDEO, MENU, TODOS;
+terminal String ID_PAGINA;
+
+
+non terminal listas_instrucciones, instruccion, visitas_sitio;
+non terminal visitas_pagina, listado_sitios, paginas_populares;
+non terminal componentes;
+non terminal String tipo_componente;
+
+start with listas_instrucciones;
+
+listas_instrucciones ::= instruccion:i listas_instrucciones {: :}
+                    | instruccion:i {:  :}
+                    ;
+
+instruccion ::= CONSULTAR visitas_sitio:s {: :}
+             | CONSULTAR visitas_pagina:i {: :}
+             | CONSULTAR paginas_populares:a {::}
+             | CONSULTAR componentes:c {:  :}
+             
+             ;
+			 
+			 
+visitas_sitio ::= VISITASITIO listado_sitios P_COMA
+				{:consultas.add(new VisitasSitio(idPaginas));
+				idPaginas.clear();:}
+				;
+
+visitas_pagina ::= VISITAPAGINA listado_sitios P_COMA
+				{:consultas.add(new VisitasPagina(idPaginas));
+				idPaginas.clear();
+				:}
+				;
+
+paginas_populares ::= PAG_POPULAR COMILLA ID_PAGINA:id COMILLA P_COMA
+				{:consultas.add(new PaginasPopulares(id));:}
+				;
+
+componentes ::= COMPONENTE tipo_componente:c COMILLA ID_PAGINA:id COMILLA P_COMA
+				{:consultas.add(new ConsultaComponentes(id, c));:}
+				;
+
+listado_sitios ::= COMILLA ID_PAGINA:id COMILLA COMA listado_sitios {:idPaginas.add(id);:}
+				| COMILLA ID_PAGINA:id COMILLA {:idPaginas.add(id);:}
+				;
+
+tipo_componente ::= TITULO {:RESULT = "TITULO"; :}
+	| PARRAFO {:RESULT = "PARRAFO"; :}
+	| IMAGEN {:RESULT = "IMAGEN"; :}
+	| VIDEO {:RESULT = "VIDEO"; :}
+	| MENU {:RESULT = "MENU"; :}
+	| TODOS {:RESULT = "TODOS"; :}
+	;

@@ -6,29 +6,44 @@ package com.rudyreyes.manejadorweb.vista;
 
 import com.rudyreyes.manejadorweb.LexerXML;
 import com.rudyreyes.manejadorweb.ManejadorWeb;
+import com.rudyreyes.manejadorweb.ParserSQ;
 import com.rudyreyes.manejadorweb.ParserXML;
+import com.rudyreyes.manejadorweb.lexerSQ;
 import com.rudyreyes.manejadorweb.modelo.componente.Componente;
 import com.rudyreyes.manejadorweb.modelo.componente.EliminarComponente;
 import com.rudyreyes.manejadorweb.modelo.componente.ModificarComponentes;
+import com.rudyreyes.manejadorweb.modelo.consultas.ConsultaComponentes;
+import com.rudyreyes.manejadorweb.modelo.consultas.PaginasPopulares;
+import com.rudyreyes.manejadorweb.modelo.consultas.VisitasPagina;
+import com.rudyreyes.manejadorweb.modelo.consultas.VisitasSitio;
 import com.rudyreyes.manejadorweb.modelo.paginaweb.BorrarPaginaWeb;
 import com.rudyreyes.manejadorweb.modelo.paginaweb.ModificarPagina;
 import com.rudyreyes.manejadorweb.modelo.paginaweb.PaginaWeb;
 import com.rudyreyes.manejadorweb.modelo.sitioweb.BorrarSitioWeb;
 import com.rudyreyes.manejadorweb.modelo.sitioweb.SitioWeb;
 import com.rudyreyes.manejadorweb.modelo.util.AgregarYEliminarComponentes;
+import com.rudyreyes.manejadorweb.modelo.util.Consultas;
 import com.rudyreyes.manejadorweb.modelo.util.EscribirPaginasWeb;
 import com.rudyreyes.manejadorweb.modelo.util.EscribirSitiosWeb;
 import com.rudyreyes.manejadorweb.modelo.util.GenerarArchivos;
 import com.rudyreyes.manejadorweb.modelo.util.ImprimirDatosConsola;
 import com.rudyreyes.manejadorweb.modelo.util.LevantarServidor;
 import com.rudyreyes.manejadorweb.modelo.util.VerificacionesHtml;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -67,9 +82,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         areaErrores = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        areaConsultas = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         verConsultas = new javax.swing.JButton();
+        limpiarArea = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Generar Paginas");
@@ -81,7 +97,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("APLICACION CLIENTE");
 
         areaXML.setColumns(20);
-        areaXML.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        areaXML.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         areaXML.setRows(5);
         jScrollPane2.setViewportView(areaXML);
 
@@ -91,6 +107,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         subirArchivo.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         subirArchivo.setText("Subir Archivo");
+        subirArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subirArchivoActionPerformed(evt);
+            }
+        });
 
         generarPaginas.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         generarPaginas.setText("Generar Paginas");
@@ -101,7 +122,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         areaErrores.setColumns(20);
-        areaErrores.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        areaErrores.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         areaErrores.setRows(5);
         jScrollPane1.setViewportView(areaErrores);
 
@@ -109,10 +130,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Area de Respuestas y Errores del sistema");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        areaConsultas.setColumns(20);
+        areaConsultas.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        areaConsultas.setRows(5);
+        jScrollPane3.setViewportView(areaConsultas);
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -120,6 +141,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         verConsultas.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         verConsultas.setText("Ver Consultas");
+        verConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verConsultasActionPerformed(evt);
+            }
+        });
+
+        limpiarArea.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        limpiarArea.setText("Limpiar Area");
+        limpiarArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarAreaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,54 +161,68 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(subirArchivo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
+                        .addComponent(subirArchivo)
+                        .addGap(30, 30, 30)
+                        .addComponent(limpiarArea)
+                        .addGap(31, 31, 31)
                         .addComponent(generarPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(verConsultas)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(146, 146, 146)
+                                .addComponent(verConsultas)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subirArchivo)
+                    .addComponent(limpiarArea)
+                    .addComponent(generarPaginas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(subirArchivo)
-                        .addGap(30, 30, 30)
-                        .addComponent(generarPaginas)
-                        .addGap(26, 26, 26)
+                        .addGap(36, 36, 36)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(verConsultas)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(verConsultas)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane1)))
-                .addGap(21, 21, 21))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,7 +233,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -401,7 +451,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                 // Imprimir las visitas después de un tiempo
                 Thread.sleep(5000); // Esperar 5 segundos (puedes ajustar este tiempo)
-                LevantarServidor.imprimirTodasLasVisitas();
+                
             } catch (Exception ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -409,6 +459,120 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_generarPaginasActionPerformed
+
+    private void verConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verConsultasActionPerformed
+        String entrada = areaConsultas.getText();
+        areaErrores.setText("");
+        lexerSQ lexer = new lexerSQ(new StringReader(entrada));
+        ParserSQ parser = new ParserSQ(lexer);
+        
+        try {
+            parser.parse();
+            
+            List<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
+            
+            for (Object objeto : consultas) {
+                if (objeto instanceof ConsultaComponentes) {
+                    ConsultaComponentes consulta = (ConsultaComponentes)objeto;
+                    String resultado = Consultas.componentesPagina(paginas, consulta);
+                    areaErrores.append(resultado);
+                    consulta.imprimirDatos();
+                
+                }else if(objeto instanceof PaginasPopulares){
+                    PaginasPopulares consulta = (PaginasPopulares)objeto;
+                    visitasPorPagina = LevantarServidor.obtenerTodasLasVisitas();
+                    
+                    List<Map.Entry<String, Integer>> lista = new LinkedList<>(visitasPorPagina.entrySet());
+
+                    // Ordenar la lista en base a los valores (en orden descendente)
+                    Collections.sort(lista, new Comparator<Map.Entry<String, Integer>>() {
+                        @Override
+                        public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                            return o2.getValue().compareTo(o1.getValue());
+                        }
+                    });
+                    
+                    String resultado = Consultas.paginasPopulares(lista, sitios, consulta.getIdPagina());
+                    areaErrores.append(resultado);
+                    consulta.imprimirDatos();
+                
+                }else if(objeto instanceof VisitasPagina){
+                    VisitasPagina consulta = (VisitasPagina)objeto;
+                    visitasPorPagina = LevantarServidor.obtenerTodasLasVisitas();
+                    
+                    areaErrores.append("Visitas de las Paginas\n");
+                    for(String cs: consulta.getIdPaginas()){
+                        areaErrores.append("Pagina "+cs +" Visitas: "+LevantarServidor.obtenerVisitasPorPagina(cs)+" \n");
+                    }
+                    
+                    
+                    consulta.imprimirDatos();
+                    
+                
+                }else if(objeto instanceof VisitasSitio){
+                    VisitasSitio consulta = (VisitasSitio)objeto;
+                    areaErrores.append("Visitas de los Sitios Web\n");
+                    
+                    for(String cs: consulta.getIdSitios()){
+                        for(SitioWeb sitio: sitios){
+                            int cant=0;
+                            if(sitio.getIdSitio().equals(cs)){
+                                for(String pagina: sitio.getPaginasWeb()){
+                                    cant += LevantarServidor.obtenerVisitasPorPagina(pagina);
+                                }
+                                
+                                areaErrores.append("El sitio "+sitio.getIdSitio()+" tiene un total de visitas: "+cant+"\n");
+                            }
+                        }
+                    }
+                    consulta.imprimirDatos();
+                }
+                
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ManejadorWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_verConsultasActionPerformed
+
+    private void limpiarAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarAreaActionPerformed
+        areaXML.setText("");
+    }//GEN-LAST:event_limpiarAreaActionPerformed
+
+    private void subirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirArchivoActionPerformed
+        //Creamos el objeto JFileChooser
+        JFileChooser fc = new JFileChooser();
+
+//Creamos el filtro//Archivos de texto (*.txt, *.py)", "txt", "py"
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto (*.txt, *.py, *.xml)", "txt", "py", "xml");
+
+//Le indicamos el filtro
+        fc.setFileFilter(filtro);
+//Abrimos la ventana, guardamos la opcion seleccionada por el usuario
+        int seleccion = fc.showOpenDialog(this);
+
+//Si el usuario, pincha en aceptar
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+            //Seleccionamos el fichero
+            File fichero = fc.getSelectedFile();
+
+            //Ecribe la ruta del fichero seleccionado en el campo de texto
+            //textField.setText(fichero.getAbsolutePath());
+            try (FileReader fr = new FileReader(fichero)) {
+                String cadena = "";
+                int valor = fr.read();
+                while (valor != -1) {
+                    cadena = cadena + (char) valor;
+                    valor = fr.read();
+                }
+                areaXML.setText(cadena);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        }
+    }//GEN-LAST:event_subirArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -446,6 +610,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaConsultas;
     private javax.swing.JTextArea areaErrores;
     private javax.swing.JTextArea areaXML;
     private javax.swing.JButton generarPaginas;
@@ -457,7 +622,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JButton limpiarArea;
     private javax.swing.JButton subirArchivo;
     private javax.swing.JButton verConsultas;
     // End of variables declaration//GEN-END:variables

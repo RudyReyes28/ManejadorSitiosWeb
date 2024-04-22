@@ -108,7 +108,7 @@ public class EscribirPaginasWeb {
                 etiquetaH1 +=" color: " + color +";";
             }
             
-            etiquetaH1+= "\">"+texto +"</h1>\n";
+            etiquetaH1+= "\">"+texto +"</h1><br>\n";
             
             return etiquetaH1;
         //------PARRAFO---------
@@ -137,7 +137,7 @@ public class EscribirPaginasWeb {
                 etiquetaP +=" color: " + color +";";
             }
             
-            etiquetaP+= "\">"+texto +"</p>\n";
+            etiquetaP+= "\">"+texto +"</p><br>\n";
             
             return etiquetaP;
         //----IMAGENES--------
@@ -181,7 +181,7 @@ public class EscribirPaginasWeb {
                 etiquetaImg += "style=\"text-align: "+ alineacionEtiqueta(alineacion)+";\"";
             }
             
-            etiquetaImg += ">\n";
+            etiquetaImg += "><br>\n";
             
             return etiquetaImg;
             
@@ -216,7 +216,7 @@ public class EscribirPaginasWeb {
                 etiquetaVideo += " src=\""+origen+"\"";
             }
             
-            etiquetaVideo += "frameborder=\"0\" allowfullscreen></iframe>\n";
+            etiquetaVideo += "frameborder=\"0\" allowfullscreen></iframe><br>\n";
             
             
             return etiquetaVideo;

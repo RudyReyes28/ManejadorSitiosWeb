@@ -36,7 +36,7 @@ public class EscribirSitiosWeb {
                     + "<title>" + sitio.getIdSitio() + "</title>\n"
                     + "</head>\n"
                     + "<body>\n"
-                    + "<h1> Sitio WEB" + sitio.getIdSitio() + "</h1>\n\n";
+                    + "<h1> Sitio WEB" + sitio.getIdSitio() + "</h1><br>\n";
             String estructura = "";
             for (PaginaWeb pagina : paginas) {
                 if (pagina.getSitio() != null) {
