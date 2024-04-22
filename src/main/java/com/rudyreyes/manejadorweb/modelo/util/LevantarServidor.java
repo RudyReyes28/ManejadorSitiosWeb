@@ -4,7 +4,11 @@
  */
 package com.rudyreyes.manejadorweb.modelo.util;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +24,12 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
  * @author rudyo
  */
 public class LevantarServidor {
-    
+    private static Map<String, Integer> visitasPorPagina = new HashMap<>();
+    private static Server server;
     public static void levantarServidor() throws InterruptedException, Exception {
          // Crear un servidor Jetty en el puerto 8080
         
-        Server server = new Server(8080);
+        server = new Server(8080);
 
         // Configurar el manejador de recursos estáticos
         ResourceHandler resourceHandler = new ResourceHandler();
@@ -53,22 +58,27 @@ public class LevantarServidor {
     static class RequestLoggerHandler extends AbstractHandler {
         @Override
         public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-            // Imprimir en consola la página a la que se ha accedido
-            System.out.println("Has ingresado a " + eliminarDiagonalYExtension(target));
+            String paginaVisitada = eliminarDiagonalYExtension(target);
+            visitasPorPagina.put(paginaVisitada, visitasPorPagina.getOrDefault(paginaVisitada, 0) + 1);
+            System.out.println("Has ingresado a " + paginaVisitada);
         }
     }
     
-   public static void pararServidor(){
-       Server server = new Server(8080); // Reemplaza con el puerto real
-
-       
-        try {
+   public static void pararServidor() throws Exception{
+       if (server != null && server.isRunning()) {
             server.stop();
-            System.out.println("Servidor Jetty detenido exitosamente.");
-        } catch (Exception e) {
-            System.err.println("Error al detener el servidor Jetty: " + e.getMessage());
         }
    }
+   
+   // Método para obtener el número de visitas para una página específica
+    public static int obtenerVisitasPorPagina(String pagina) {
+        return visitasPorPagina.getOrDefault(pagina, 0);
+    }
+
+    // Método para obtener todas las páginas visitadas y su número de visitas
+    public static Map<String, Integer> obtenerTodasLasVisitas() {
+        return visitasPorPagina;
+    }
     
     public static String eliminarDiagonalYExtension(String input) {
         // Remove the first slash if it exists
@@ -82,5 +92,23 @@ public class LevantarServidor {
         }
 
         return input;
+    }
+    
+    public static void abrirPagina(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void imprimirTodasLasVisitas() {
+        System.out.println("=== Registro de visitas ===");
+        for (Map.Entry<String, Integer> entry : visitasPorPagina.entrySet()) {
+            String pagina = entry.getKey();
+            int visitas = entry.getValue();
+            System.out.println(pagina + ": " + visitas + " visitas");
+        }
+        System.out.println("===========================");
     }
 }

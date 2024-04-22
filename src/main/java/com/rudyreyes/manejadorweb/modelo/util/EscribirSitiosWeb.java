@@ -90,4 +90,29 @@ public class EscribirSitiosWeb {
         return false;
     }
     
+    public static void generarIndex(List<SitioWeb> sitios) {
+
+        String si = "<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "<head>\n"
+                + "<title>" + "Sitios_Web" + "</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<h1> SITIOS WEB DISPONIBLES</h1>\n\n";
+        String estructura = "";
+        for (SitioWeb sitio : sitios) {
+            if (sitio.getIdSitio() != null) {
+
+                estructura += "<a href=\"http://localhost:8080/" + sitio.getIdSitio() + ".html\"" + ">Ir al sitio " + sitio.getIdSitio() + "</a><br>";
+
+            }
+        }
+
+        si += estructura;
+        si += "</body>\n"
+                + "</html>";
+
+        GenerarArchivos.escribirArchivo(si, "indexSitiosWeb");
+    }
+
 }

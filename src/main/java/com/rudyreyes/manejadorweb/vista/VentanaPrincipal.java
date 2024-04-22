@@ -20,10 +20,13 @@ import com.rudyreyes.manejadorweb.modelo.util.EscribirPaginasWeb;
 import com.rudyreyes.manejadorweb.modelo.util.EscribirSitiosWeb;
 import com.rudyreyes.manejadorweb.modelo.util.GenerarArchivos;
 import com.rudyreyes.manejadorweb.modelo.util.ImprimirDatosConsola;
+import com.rudyreyes.manejadorweb.modelo.util.LevantarServidor;
 import com.rudyreyes.manejadorweb.modelo.util.VerificacionesHtml;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,12 +37,14 @@ import java.util.logging.Logger;
 public class VentanaPrincipal extends javax.swing.JFrame {
     List<SitioWeb> sitios = new ArrayList<>();
     List<PaginaWeb> paginas = new ArrayList<>();
+    private Map<String, Integer> visitasPorPagina = new HashMap<>();
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
-        initComponents();
         GenerarArchivos.generarCarpeta();
+        initComponents();
+        
     }
 
     /**
@@ -190,6 +195,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String entradaXML = areaXML.getText();
         areaErrores.setText("");
         if (entradaXML != null) {
+            try {
+                LevantarServidor.pararServidor();
+            } catch (Exception ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             LexerXML lexer = new LexerXML(new StringReader(entradaXML));
             ParserXML parser = new ParserXML(lexer);
 
@@ -329,6 +340,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 sitios.add(nuevoComponente);
                                 String contenido = EscribirSitiosWeb.generarContenidoHTMLSitio(nuevoComponente.getIdSitio(), "Sitio Web " + nuevoComponente.getIdSitio());
                                 GenerarArchivos.escribirArchivo(contenido, nuevoComponente.getIdSitio());
+                                //GENERAR INDEX
+                                EscribirSitiosWeb.generarIndex(sitios);
                             } else {
                                 areaErrores.append("Inserte el ID del sitio web que desea crear\n");
                             }
@@ -348,7 +361,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 
                                 if(encontrado){
                                     GenerarArchivos.eliminarArchivo(nuevoComponente.getIdSitio());
-                                    
+                                    //GENERAR INDEX
+                                    EscribirSitiosWeb.generarIndex(sitios);
                                 }else{
                                     areaErrores.setText("Sitio no encontrada\n");
                                 }
@@ -366,6 +380,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             
             parser.limpiarAcciones();
+            
+            try {
+                // Crear un hilo para levantar el servidor
+                Thread servidorThread = new Thread(() -> {
+                    try {
+                        LevantarServidor.levantarServidor();
+                    } catch (Exception ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+                servidorThread.start(); // Iniciar el hilo del servidor
+
+                // Esperar un momento para asegurarse de que el servidor se haya iniciado correctamente
+                Thread.sleep(1000); // Puedes ajustar este tiempo según sea necesario
+
+                // Abrir la página en el navegador
+                String url = "http://localhost:8080/indexSitiosWeb.html";
+                LevantarServidor.abrirPagina(url);
+
+                // Imprimir las visitas después de un tiempo
+                Thread.sleep(5000); // Esperar 5 segundos (puedes ajustar este tiempo)
+                LevantarServidor.imprimirTodasLasVisitas();
+            } catch (Exception ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
